@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMP Negeri 3 Karanglewas - Unggul, Berkarakter, Siap Masa Depan</title>
+<meta name="description" content="Website Resmi SMP Negeri 3 Karanglewas - Unggul dalam Prestasi, Berkarakter dalam Perilaku, dan Siap Menghadapi Masa Depan.">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Loading Screen -->
+<div id="loading-screen">
+  <div class="loading-logo">
+    <div style="font-size:3rem;margin-bottom:0.5rem">🏫</div>
+    SMP Negeri 3 Karanglewas
+    <span>Memuat website...</span>
+  </div>
+  <div class="loading-bar"><div class="loading-progress"></div></div>
+</div>
+
+<!-- Navbar -->
+<nav id="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="#" onclick="showPage('beranda')">
+      <div class="navbar-logo">SMP3</div>
+      <div class="navbar-title">SMPN 3 Karanglewas <small>Kabupaten Banyumas</small></div>
+    </a>
+    <div class="navbar-nav" id="desktop-nav">
+      <a class="nav-link active" href="#" onclick="showPage('beranda')">Beranda</a>
+      <a class="nav-link" href="#" onclick="showPage('profil')">Profil</a>
+      <a class="nav-link" href="#" onclick="showPage('game')">Game Edukasi</a>
+      <a class="nav-link" href="#" onclick="showPage('ekskul')">Ekskul</a>
+      <a class="nav-link" href="#" onclick="showPage('guru')">Ruang Guru</a>
+      <a class="nav-link" href="#" onclick="showPage('perpus')">Perpustakaan</a>
+      <a class="nav-link" href="#" onclick="showPage('galeri')">Galeri</a>
+      <a class="nav-link" href="#" onclick="showPage('link')">Link Penting</a>
+      <a class="nav-link" href="#" onclick="showPage('kontak')">Kontak</a>
+    </div>
+    <div class="navbar-actions">
+      <button class="btn-search" onclick="openSearch()">🔍 Cari</button>
+      <button class="btn-theme" id="themeBtn" onclick="toggleTheme()" title="Toggle Dark Mode">🌙</button>
+      <a class="btn-ppdb" href="#" onclick="showPage('ppdb')">PPDB Online</a>
+      <button class="hamburger" id="hamburgerBtn" onclick="toggleMobile()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a class="nav-link" href="#" onclick="showPage('beranda');closeMobile()">🏠 Beranda</a>
+  <a class="nav-link" href="#" onclick="showPage('profil');closeMobile()">🏫 Profil Sekolah</a>
+  <a class="nav-link" href="#" onclick="showPage('game');closeMobile()">🎮 Game Edukasi</a>
+  <a class="nav-link" href="#" onclick="showPage('ekskul');closeMobile()">⭐ Ekstrakurikuler</a>
+  <a class="nav-link" href="#" onclick="showPage('guru');closeMobile()">👩‍🏫 Ruang Guru</a>
+  <a class="nav-link" href="#" onclick="showPage('perpus');closeMobile()">📚 Perpustakaan</a>
+  <a class="nav-link" href="#" onclick="showPage('galeri');closeMobile()">🖼️ Galeri</a>
+  <a class="nav-link" href="#" onclick="showPage('ppdb');closeMobile()">📝 PPDB Online</a>
+  <a class="nav-link" href="#" onclick="showPage('link');closeMobile()">🔗 Link Penting</a>
+  <a class="nav-link" href="#" onclick="showPage('kontak');closeMobile()">📞 Kontak</a>
+</div>
+
+<!-- Search Overlay -->
+<div class="search-overlay" id="searchOverlay" onclick="closeSearch(event)">
+  <div class="search-box" onclick="event.stopPropagation()">
+    <h3>🔍 Pencarian Global</h3>
+    <div class="search-input-wrap">
+      <input type="text" class="search-input" id="searchInput" placeholder="Cari berita, guru, ekskul, link..." oninput="doSearch(this.value)">
+      <button class="btn btn-primary btn-sm" onclick="closeSearch()">Tutup</button>
+    </div>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</div>
+
+<!-- ========== MAIN PAGES ========== -->
+<main id="main-content">
+
+<!-- BERANDA -->
+<div id="page-beranda" class="page-section active">
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="hero-badge">🏆 Sekolah Unggulan Karanglewas</div>
+        <h1 class="hero-title">SMP Negeri 3 <span>Karanglewas</span></h1>
+        <p class="hero-tagline"><em>"Unggul dalam Prestasi, Berkarakter dalam Perilaku, dan Siap Menghadapi Masa Depan."</em></p>
+        <div class="hero-actions">
+          <button class="btn-hero-primary" onclick="showPage('profil')">📋 Profil Sekolah</button>
+          <button class="btn-hero-outline" onclick="showPage('ppdb')">📝 PPDB Online</button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card-main">
+          <div style="text-align:center;font-size:5rem;margin-bottom:1rem">🏫</div>
+          <div class="hero-school-name">SMP Negeri 3 Karanglewas</div>
+          <div class="hero-school-tagline">Kec. Karanglewas, Kab. Banyumas, Jawa Tengah</div>
+          <div class="hero-stats-mini">
+            <div class="hero-stat-mini"><span class="hero-stat-mini-num" id="h-siswa">640</span><span class="hero-stat-mini-label">Siswa</span></div>
+            <div class="hero-stat-mini"><span class="hero-stat-mini-num" id="h-guru">42</span><span class="hero-stat-mini-label">Guru</span></div>
+            <div class="hero-stat-mini"><span class="hero-stat-mini-num" id="h-prestasi">87</span><span class="hero-stat-mini-label">Prestasi</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll">▼ Scroll ke bawah</div>
+  </section>
+
+  <!-- Statistik -->
+  <section class="section" style="background:var(--bg)">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-eyebrow">Data Sekolah</div>
+        <h2 class="section-title">Statistik SMPN 3 Karanglewas</h2>
+      </div>
+      <div class="stats-grid fade-in">
+        <div class="stat-card"><div class="stat-icon">👨‍🎓</div><div class="stat-number counter" data-target="640">0</div><div class="stat-label">Total Siswa</div></div>
+        <div class="stat-card"><div class="stat-icon">👩‍🏫</div><div class="stat-number counter" data-target="42">0</div><div class="stat-label">Tenaga Pendidik</div></div>
+        <div class="stat-card"><div class="stat-icon">🏛️</div><div class="stat-number counter" data-target="20">0</div><div class="stat-label">Rombel / Kelas</div></div>
+        <div class="stat-card"><div class="stat-icon">⭐</div><div class="stat-number counter" data-target="6">0</div><div class="stat-label">Ekstrakurikuler</div></div>
+        <div class="stat-card"><div class="stat-icon">🏆</div><div class="stat-number counter" data-target="87">0</div><div class="stat-label">Total Prestasi</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sambutan Kepala Sekolah -->
+  <section class="section sambutan-section">
+    <div class="sambutan-inner">
+      <div class="sambutan-photo fade-in">
+        <div class="photo-frame">👨‍💼</div>
+        <div class="sambutan-name">Drs. Ahmad Fauzi, M.Pd.</div>
+        <div class="sambutan-role">Kepala SMP Negeri 3 Karanglewas</div>
+      </div>
+      <div class="fade-in">
+        <div class="section-eyebrow">Sambutan Kepala Sekolah</div>
+        <blockquote class="sambutan-quote">"Selamat datang di SMP Negeri 3 Karanglewas, sekolah yang berkomitmen mencetak generasi unggul dan berkarakter."</blockquote>
+        <p class="sambutan-text">Assalamu'alaikum Wr. Wb. Puji syukur kehadirat Allah SWT atas segala limpahan rahmat dan karunia-Nya. Selamat datang di website resmi SMP Negeri 3 Karanglewas. Sekolah kami hadir sebagai lembaga pendidikan yang berdedikasi tinggi dalam membentuk generasi muda yang cerdas, berakhlak mulia, dan siap menghadapi tantangan era global.</p>
+        <p class="sambutan-text">Kami berkomitmen memberikan pelayanan pendidikan terbaik melalui tenaga pengajar profesional, fasilitas lengkap, dan program unggulan yang mendukung tumbuh kembang peserta didik secara holistik. Jadikan website ini sebagai jembatan komunikasi antara sekolah, siswa, dan orang tua.</p>
+        <button class="btn btn-primary" onclick="showPage('profil')">Baca Selengkapnya →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Keunggulan -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-eyebrow">Mengapa Kami</div>
+        <h2 class="section-title">Keunggulan SMPN 3 Karanglewas</h2>
+        <p class="section-desc">Kami menghadirkan ekosistem belajar terbaik untuk mendukung prestasi akademik dan non-akademik siswa.</p>
+      </div>
+      <div class="keunggulan-grid fade-in">
+        <div class="keunggulan-card"><div class="keunggulan-icon">👩‍🏫</div><div class="keunggulan-title">Guru Profesional</div><p class="keunggulan-text">Didukung oleh tenaga pengajar berpengalaman dan bersertifikasi yang terus mengembangkan kompetensi diri.</p></div>
+        <div class="keunggulan-card"><div class="keunggulan-icon">🖥️</div><div class="keunggulan-title">Fasilitas Lengkap</div><p class="keunggulan-text">Lab komputer, lab IPA, perpustakaan, lapangan olahraga, dan berbagai fasilitas pendukung pembelajaran modern.</p></div>
+        <div class="keunggulan-card"><div class="keunggulan-icon">🌿</div><div class="keunggulan-title">Lingkungan Nyaman</div><p class="keunggulan-text">Lingkungan sekolah yang hijau, bersih, aman, dan kondusif untuk proses belajar mengajar yang optimal.</p></div>
+        <div class="keunggulan-card"><div class="keunggulan-icon">📚</div><div class="keunggulan-title">Prestasi Akademik</div><p class="keunggulan-text">Konsisten meraih prestasi tingkat kabupaten hingga nasional dalam berbagai olimpiade dan kompetisi akademik.</p></div>
+        <div class="keunggulan-card"><div class="keunggulan-icon">🏆</div><div class="keunggulan-title">Prestasi Non Akademik</div><p class="keunggulan-text">Aktif berprestasi di bidang olahraga, seni, dan pramuka di berbagai ajang kompetisi tingkat daerah dan nasional.</p></div>
+        <div class="keunggulan-card"><div class="keunggulan-icon">💻</div><div class="keunggulan-title">Pembelajaran Digital</div><p class="keunggulan-text">Mengintegrasikan teknologi digital dalam pembelajaran untuk menyiapkan siswa menghadapi era Industri 4.0.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Berita Terbaru -->
+  <section class="section" style="background:var(--bg)">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-eyebrow">Informasi</div>
+        <h2 class="section-title">Berita Terbaru</h2>
+        <p class="section-desc">Ikuti terus informasi dan berita terkini dari SMPN 3 Karanglewas.</p>
+      </div>
+      <div class="grid-3 fade-in" id="berita-home"></div>
+      <div style="text-align:center;margin-top:2rem">
+        <button class="btn btn-outline" onclick="showPage('berita')">Lihat Semua Berita →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-eyebrow">FAQ</div>
+        <h2 class="section-title">Pertanyaan Umum</h2>
+      </div>
+      <div style="max-width:700px;margin:0 auto">
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Bagaimana cara mendaftar PPDB? <span class="faq-icon">+</span></div><div class="faq-a">Pendaftaran PPDB dilakukan secara online melalui website ini. Klik menu "PPDB Online" dan isi formulir pendaftaran dengan lengkap, unggah dokumen yang diperlukan, dan simpan nomor pendaftaran Anda.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Apa saja ekstrakurikuler yang tersedia? <span class="faq-icon">+</span></div><div class="faq-a">SMP Negeri 3 Karanglewas memiliki 6 ekstrakurikuler: Pramuka, Bola Voli, PMR, Sepak Bola, Seni Tari, dan Hadroh. Setiap siswa diwajibkan mengikuti minimal satu ekstrakurikuler.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Bagaimana cara menghubungi sekolah? <span class="faq-icon">+</span></div><div class="faq-a">Anda dapat menghubungi sekolah melalui telepon di nomor (0281) 655123, email di smpn3karanglewas@gmail.com, atau kunjungi langsung di Jl. Raya Karanglewas, Kab. Banyumas.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Apakah ada beasiswa yang tersedia? <span class="faq-icon">+</span></div><div class="faq-a">Ya, sekolah memiliki beberapa program beasiswa antara lain PIP (Program Indonesia Pintar), beasiswa prestasi, dan beasiswa kurang mampu. Hubungi bagian TU untuk informasi lebih lanjut.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Kapan jam operasional sekolah? <span class="faq-icon">+</span></div><div class="faq-a">Jam operasional Senin–Kamis: 07.00–15.00 WIB, Jumat: 07.00–11.30 WIB, Sabtu (ekskul): 07.00–12.00 WIB. Hari Minggu dan hari libur nasional sekolah tutup.</div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- PROFIL SEKOLAH -->
+<div id="page-profil" class="page-section" style="padding-top:70px">
+  <div style="background:linear-gradient(135deg,#1E3A8A,#2563EB);padding:4rem 1.5rem;text-align:center;color:white">
+    <div class="section-eyebrow" style="background:rgba(255,255,255,0.15);color:white">Tentang Kami</div>
+    <h1 style="font-family:'Poppins',sans-serif;font-size:2.2rem;font-weight:800;margin:0.75rem 0">Profil SMPN 3 Karanglewas</h1>
+    <p style="opacity:0.85;max-width:600px;margin:0 auto">Mengenal lebih dekat sekolah kami, visi misi, sejarah, dan seluruh civitas akademika.</p>
+  </div>
+  <div class="section">
+    <div class="section-inner">
+      <div class="profil-tabs">
+        <button class="profil-tab active" onclick="switchProfilTab(this,'sejarah')">📜 Sejarah</button>
+        <button class="profil-tab" onclick="switchProfilTab(this,'visi-misi')">🎯 Visi & Misi</button>
+        <button class="profil-tab" onclick="switchProfilTab(this,'sambutan')">💬 Sambutan</button>
+        <button class="profil-tab" onclick="switchProfilTab(this,'struktur')">🗂️ Struktur Organisasi</button>
+        <button class="profil-tab" onclick="switchProfilTab(this,'guru-list')">👩‍🏫 Data Guru</button>
+        <button class="profil-tab" onclick="switchProfilTab(this,'prestasi-list')">🏆 Prestasi</button>
+        <button class="profil-tab" onclick="switchProfilTab(this,'fasilitas-list')">🏛️ Fasilitas</button>
+      </div>
+
+      <div id="profil-sejarah" class="profil-content active">
+        <div class="visi-misi-card">
+          <h3>Sejarah SMP Negeri 3 Karanglewas</h3>
+          <p style="color:var(--text-muted);line-height:1.8;margin-bottom:1.5rem">SMP Negeri 3 Karanglewas merupakan salah satu sekolah menengah pertama negeri yang berdiri di Kecamatan Karanglewas, Kabupaten Banyumas, Provinsi Jawa Tengah. Sekolah ini didirikan atas dasar kebutuhan masyarakat Karanglewas dan sekitarnya akan lembaga pendidikan menengah pertama yang berkualitas.</p>
+          <div class="timeline">
+            <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1985</div><div class="timeline-text">Pendirian SMP Negeri 3 Karanglewas berdasarkan SK Menteri Pendidikan dan Kebudayaan. Sekolah mulai beroperasi dengan 3 rombongan belajar.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1992</div><div class="timeline-text">Pembangunan gedung baru dan penambahan fasilitas laboratorium IPA. Jumlah siswa meningkat menjadi 12 rombongan belajar.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">2003</div><div class="timeline-text">Sekolah mendapatkan akreditasi A pertama kali dan mulai mengembangkan program ekstrakurikuler unggulan.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">2010</div><div class="timeline-text">Pembangunan laboratorium komputer dan perpustakaan digital sebagai bagian dari modernisasi fasilitas pembelajaran.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">2018</div><div class="timeline-text">Meraih predikat sekolah adiwiyata tingkat nasional dan berbagai prestasi akademik bergengsi.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">2024</div><div class="timeline-text">Re-akreditasi dengan nilai A (Unggul) dan meluncurkan program digitalisasi pembelajaran berbasis teknologi modern.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="profil-visi-misi" class="profil-content">
+        <div class="visi-misi-card">
+          <h3>🎯 Visi Sekolah</h3>
+          <p style="font-size:1.1rem;color:var(--text);line-height:1.7;padding:1rem;background:rgba(37,99,235,0.05);border-radius:var(--radius);border-left:4px solid var(--primary)">"Terwujudnya peserta didik yang beriman, bertaqwa, berakhlak mulia, berprestasi, berbudaya, dan berwawasan lingkungan dalam rangka menyiapkan generasi emas Indonesia."</p>
+        </div>
+        <div class="visi-misi-card">
+          <h3>📌 Misi Sekolah</h3>
+          <ul class="misi-list">
+            <li>Meningkatkan keimanan dan ketaqwaan kepada Tuhan Yang Maha Esa melalui pembiasaan dan keteladanan</li>
+            <li>Mewujudkan pembelajaran yang aktif, kreatif, efektif, menyenangkan, dan bermutu</li>
+            <li>Meningkatkan kompetensi tenaga pendidik dan kependidikan secara berkelanjutan</li>
+            <li>Mengembangkan bakat dan minat peserta didik melalui kegiatan intrakurikuler dan ekstrakurikuler</li>
+            <li>Membangun budaya sekolah yang kondusif, demokratis, dan berkarakter</li>
+            <li>Memanfaatkan teknologi informasi dan komunikasi dalam seluruh aspek pengelolaan sekolah</li>
+            <li>Menjalin kerjasama yang harmonis antara sekolah, orang tua, masyarakat, dan instansi terkait</li>
+            <li>Mewujudkan lingkungan sekolah yang bersih, indah, sehat, dan ramah lingkungan</li>
+          </ul>
+        </div>
+        <div class="visi-misi-card">
+          <h3>🏁 Tujuan Sekolah</h3>
+          <ul class="misi-list">
+            <li>Menghasilkan lulusan yang memiliki karakter baik dan kompetensi tinggi sesuai standar nasional pendidikan</li>
+            <li>Meningkatkan angka kelulusan 100% setiap tahun ajaran</li>
+            <li>Meningkatkan prestasi akademik dan non-akademik di tingkat kabupaten, provinsi, dan nasional</li>
+            <li>Mewujudkan manajemen sekolah yang transparan, akuntabel, dan berbasis data</li>
+          </ul>
+        </div>
+      </div>
+
+      <div id="profil-sambutan" class="profil-content">
+        <div class="visi-misi-card" style="display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:start">
+          <div style="text-align:center">
+            <div style="width:140px;height:140px;border-radius:var(--radius-lg);background:linear-gradient(135deg,#2563EB,#60A5FA);display:flex;align-items:center;justify-content:center;font-size:4rem;color:white;margin:0 auto 1rem">👨‍💼</div>
+            <strong style="color:var(--text)">Drs. Ahmad Fauzi, M.Pd.</strong><br>
+            <span style="color:var(--primary);font-size:0.85rem">Kepala Sekolah</span>
+          </div>
+          <div>
+            <h3>Sambutan Kepala Sekolah</h3>
+            <p style="color:var(--text-muted);line-height:1.8;margin-bottom:1rem">Assalamu'alaikum Warahmatullahi Wabarakatuh, Puji dan syukur senantiasa kita panjatkan ke hadirat Allah SWT yang telah melimpahkan rahmat dan karunia-Nya kepada kita semua. Saya menyambut dengan gembira kehadiran website resmi SMP Negeri 3 Karanglewas ini sebagai wujud komitmen kami dalam memberikan pelayanan informasi yang cepat, tepat, dan transparan kepada seluruh warga sekolah dan masyarakat.</p>
+            <p style="color:var(--text-muted);line-height:1.8;margin-bottom:1rem">SMP Negeri 3 Karanglewas terus berbenah dan berinovasi untuk mewujudkan pendidikan berkualitas. Kami berkomitmen untuk menghasilkan lulusan yang tidak hanya unggul secara akademik, tetapi juga memiliki karakter yang kuat, jiwa kepemimpinan, dan kesiapan menghadapi era digital.</p>
+            <p style="color:var(--text-muted);line-height:1.8">Semoga website ini bermanfaat bagi semua pihak. Mari bersama-sama kita wujudkan SMP Negeri 3 Karanglewas menjadi sekolah yang menjadi kebanggaan masyarakat Karanglewas dan Kabupaten Banyumas.</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="profil-struktur" class="profil-content">
+        <div class="visi-misi-card">
+          <h3>Struktur Organisasi Sekolah</h3>
+          <div class="orgs-grid">
+            <div class="org-card"><div class="org-photo">👨‍💼</div><div class="org-name">Drs. Ahmad Fauzi, M.Pd.</div><div class="org-role">Kepala Sekolah</div></div>
+            <div class="org-card"><div class="org-photo">👩‍💼</div><div class="org-name">Sri Wahyuni, S.Pd.</div><div class="org-role">Waka Kurikulum</div></div>
+            <div class="org-card"><div class="org-photo">👨‍💼</div><div class="org-name">Bambang Susanto, S.Pd.</div><div class="org-role">Waka Kesiswaan</div></div>
+            <div class="org-card"><div class="org-photo">👩‍💼</div><div class="org-name">Dewi Rahayu, S.Pd.</div><div class="org-role">Waka Sarpras</div></div>
+            <div class="org-card"><div class="org-photo">👨‍💼</div><div class="org-name">Hendra Gunawan, S.E.</div><div class="org-role">Kepala TU</div></div>
+            <div class="org-card"><div class="org-photo">👩‍💼</div><div class="org-name">Rina Fitriani, S.Pd.</div><div class="org-role">Koordinator BK</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="profil-guru-list" class="profil-content">
+        <div class="guru-grid" id="guru-profil-grid"></div>
+      </div>
+
+      <div id="profil-prestasi-list" class="profil-content">
+        <div class="prestasi-list" id="prestasi-list"></div>
+      </div>
+
+      <div id="profil-fasilitas-list" class="profil-content">
+        <div class="fasilitas-grid">
+          <div class="fasilitas-item"><span class="fasilitas-icon">🏛️</span><span class="fasilitas-text">20 Ruang Kelas</span></div>
+          <div class="fasilitas-item"><span class="fasilitas-icon">🔬</span><span class="fasilitas-text">Lab IPA</span></div>
+          <div class="fasilitas-item"><span class="fasilitas-icon">💻</span><span class="fasilitas-text">Lab Komputer</span></div>
+          <div class="fasilitas-item"><span class="fasilitas-icon">📚</span><span class="fasilitas-text">Perpustakaan</span></div>
+          <div class="fasilitas-item"><span class="fasilitas-icon">⚽</span><span class="fasilitas-text">Lapangan Olahraga</span></div>
+          <div class="fasilitas-item"><span class="fasilitas-icon">🏟️</span><span class="fasilitas-text">Aula Serbaguna</span></div>
+          <div class="fasilitas-item"><span class="fasilitas-icon">🙏</span><span class="fasilitas-text">Musala</span></div>
+          <div class="fasilitas-item"><span class="fasilitas-icon">🍽️</span><span class="fasilitas-text">Kantin Sekolah</span></div>
+          <div class="fasilitas-item"><span class="fasilitas-icon">🚿</span><span class="fasilitas-text">Toilet Bersih</span></div>
+          <div class="fasilitas-item"><span class="fasilitas-icon">🚑</span><span class="fasilitas-text">Ruang UKS</span></div>
+          <div class="fasilitas-item"><span class="fasilitas-icon">🎨</span><span class="fasilitas-text">Ruang Kesenian</span></div>
+          <div class="fasilitas-item"><span class="fasilitas-icon">🅿️</span><span class="fasilitas-text">Area Parkir Luas</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GAME EDUKASI -->
+<div id="page-game" class="page-section" style="padding-top:70px">
+  <div style="background:linear-gradient(135deg,#1E3A8A,#2563EB);padding:4rem 1.5rem;text-align:center;color:white">
+    <div class="section-eyebrow" style="background:rgba(255,255,255,0.15);color:white">Platform Belajar</div>
+    <h1 style="font-family:'Poppins',sans-serif;font-size:2rem;font-weight:800;margin:0.75rem 0">Game Edukasi</h1>
+    <p style="opacity:0.85">Direktori platform game edukasi untuk belajar sambil bermain</p>
+  </div>
+  <div class="section">
+    <div class="section-inner">
+      <div style="display:flex;gap:1rem;margin-bottom:2rem;flex-wrap:wrap">
+        <input type="text" class="search-field" placeholder="🔍 Cari game edukasi..." id="gameSearch" oninput="filterGames()">
+        <select class="select-field" id="gameKat" onchange="filterGames()">
+          <option value="">Semua Kategori</option>
+          <option value="Matematika">Matematika</option>
+          <option value="IPA">IPA</option>
+          <option value="Bahasa">Bahasa</option>
+          <option value="IPS">IPS</option>
+          <option value="Umum">Umum</option>
+        </select>
+      </div>
+      <div class="grid-4" id="game-grid"></div>
+      <div class="pagination" id="game-pagination"></div>
+    </div>
+  </div>
+</div>
+
+<!-- EKSTRAKURIKULER -->
+<div id="page-ekskul" class="page-section" style="padding-top:70px">
+  <div style="background:linear-gradient(135deg,#1E3A8A,#2563EB);padding:4rem 1.5rem;text-align:center;color:white">
+    <h1 style="font-family:'Poppins',sans-serif;font-size:2rem;font-weight:800;margin:0.75rem 0">Ekstrakurikuler</h1>
+    <p style="opacity:0.85">Kembangkan bakat dan minat bersama teman-teman</p>
+  </div>
+  <div class="section">
+    <div class="section-inner">
+      <div class="grid-3" id="ekskul-grid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- EKSKUL MODAL -->
+<div class="ekskul-modal" id="ekskul-modal">
+  <div class="ekskul-modal-box" id="ekskul-modal-content"></div>
+</div>
+
+<!-- RUANG GURU -->
+<div id="page-guru" class="page-section" style="padding-top:70px">
+  <div style="background:linear-gradient(135deg,#1E3A8A,#2563EB);padding:4rem 1.5rem;text-align:center;color:white">
+    <h1 style="font-family:'Poppins',sans-serif;font-size:2rem;font-weight:800;margin:0.75rem 0">Ruang Guru</h1>
+    <p style="opacity:0.85">Mengenal para pendidik berdedikasi SMPN 3 Karanglewas</p>
+  </div>
+  <div class="section">
+    <div class="section-inner">
+      <div class="search-filter">
+        <input type="text" class="search-field" placeholder="🔍 Cari nama guru..." id="guruSearch" oninput="filterGuru()">
+        <select class="select-field" id="guruMapel" onchange="filterGuru()">
+          <option value="">Semua Mata Pelajaran</option>
+          <option value="Matematika">Matematika</option>
+          <option value="Bahasa Indonesia">Bahasa Indonesia</option>
+          <option value="Bahasa Inggris">Bahasa Inggris</option>
+          <option value="IPA">IPA</option>
+          <option value="IPS">IPS</option>
+          <option value="PPKn">PPKn</option>
+          <option value="Agama">Agama</option>
+          <option value="PJOK">PJOK</option>
+          <option value="Seni Budaya">Seni Budaya</option>
+          <option value="TIK">TIK</option>
+        </select>
+      </div>
+      <div class="guru-grid" id="guru-grid"></div>
+      <div class="pagination" id="guru-pagination"></div>
+    </div>
+  </div>
+</div>
+
+<!-- PERPUSTAKAAN -->
+<div id="page-perpus" class="page-section" style="padding-top:70px">
+  <div class="section">
+    <div class="section-inner">
+      <div class="perpus-hero">
+        <div style="font-size:3rem;margin-bottom:1rem">📚</div>
+        <h2 id="perpus-nama">Perpustakaan Digital SMPN 3 Karanglewas</h2>
+        <p id="perpus-desc">Akses ribuan koleksi buku, jurnal, dan referensi digital untuk mendukung kegiatan belajar mengajar. Tersedia 24 jam melalui platform perpustakaan digital kami.</p>
+        <button class="btn-hero-primary" onclick="openPerpus()">📚 Masuk Perpustakaan Digital</button>
+      </div>
+      <div class="perpus-info-grid">
+        <div class="perpus-info-card"><span class="perpus-info-icon">⏰</span><div><div class="perpus-info-title">Jam Operasional</div><div class="perpus-info-text">Senin - Jumat: 07.00 – 15.00 WIB<br>Sabtu: 07.00 – 12.00 WIB</div></div></div>
+        <div class="perpus-info-card"><span class="perpus-info-icon">📖</span><div><div class="perpus-info-title">Koleksi Buku</div><div class="perpus-info-text">Lebih dari 3.500 judul buku tersedia di perpustakaan fisik dan digital.</div></div></div>
+        <div class="perpus-info-card"><span class="perpus-info-icon">💻</span><div><div class="perpus-info-title">Akses Digital</div><div class="perpus-info-text">Platform perpustakaan digital dapat diakses kapan saja dan di mana saja.</div></div></div>
+        <div class="perpus-info-card"><span class="perpus-info-icon">📞</span><div><div class="perpus-info-title">Kontak Perpustakaan</div><div class="perpus-info-text">Email: perpus.smpn3karanglewas@gmail.com</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GALERI -->
+<div id="page-galeri" class="page-section" style="padding-top:70px">
+  <div style="background:linear-gradient(135deg,#1E3A8A,#2563EB);padding:4rem 1.5rem;text-align:center;color:white">
+    <h1 style="font-family:'Poppins',sans-serif;font-size:2rem;font-weight:800;margin:0.75rem 0">Galeri Sekolah</h1>
+    <p style="opacity:0.85">Kenangan dan momen berharga kegiatan SMPN 3 Karanglewas</p>
+  </div>
+  <div class="section">
+    <div class="section-inner">
+      <div class="game-filters" id="galeri-filters">
+        <button class="filter-btn active" onclick="filterGaleri(this,'')">Semua</button>
+        <button class="filter-btn" onclick="filterGaleri(this,'Kegiatan Belajar')">Kegiatan Belajar</button>
+        <button class="filter-btn" onclick="filterGaleri(this,'Ekstrakurikuler')">Ekstrakurikuler</button>
+        <button class="filter-btn" onclick="filterGaleri(this,'Perlombaan')">Perlombaan</button>
+        <button class="filter-btn" onclick="filterGaleri(this,'Upacara')">Upacara</button>
+        <button class="filter-btn" onclick="filterGaleri(this,'Acara Sekolah')">Acara Sekolah</button>
+      </div>
+      <div class="galeri-grid" id="galeri-grid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <div class="lightbox-content">
+    <div class="lightbox-img" id="lightbox-img"></div>
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
+</div>
+
+<!-- PPDB -->
+<div id="page-ppdb" class="page-section" style="padding-top:70px">
+  <div class="section ppdb-section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-eyebrow">Penerimaan Peserta Didik Baru</div>
+        <h2 class="section-title">PPDB Online 2025/2026</h2>
+        <p class="section-desc">Daftarkan putra-putri Anda sekarang dan jadilah bagian dari keluarga besar SMPN 3 Karanglewas.</p>
+      </div>
+      <div class="ppdb-wrapper">
+        <div class="ppdb-info">
+          <h2>Prosedur Pendaftaran</h2>
+          <p>Ikuti langkah-langkah berikut untuk menyelesaikan pendaftaran PPDB Online dengan mudah.</p>
+          <div class="ppdb-steps">
+            <div class="ppdb-step"><div class="step-num">1</div><div class="step-info"><h4>Isi Formulir</h4><p>Lengkapi data siswa dan orang tua dengan benar</p></div></div>
+            <div class="ppdb-step"><div class="step-num">2</div><div class="step-info"><h4>Upload Dokumen</h4><p>Unggah pas foto, KK, dan akta kelahiran</p></div></div>
+            <div class="ppdb-step"><div class="step-num">3</div><div class="step-info"><h4>Simpan Nomor</h4><p>Catat nomor pendaftaran otomatis Anda</p></div></div>
+            <div class="ppdb-step"><div class="step-num">4</div><div class="step-info"><h4>Tunggu Verifikasi</h4><p>Tim PPDB akan memverifikasi data Anda</p></div></div>
+          </div>
+          <div style="margin-top:2rem;padding:1rem;background:rgba(37,99,235,0.08);border-radius:var(--radius);border:1px solid rgba(37,99,235,0.2)">
+            <strong style="color:var(--primary);display:block;margin-bottom:0.5rem">📅 Jadwal PPDB</strong>
+            <p style="color:var(--text-muted);font-size:0.85rem">Pendaftaran: 1 Juni – 30 Juni 2025<br>Seleksi: 1 – 5 Juli 2025<br>Pengumuman: 8 Juli 2025<br>Daftar Ulang: 9 – 14 Juli 2025</p>
+          </div>
+        </div>
+        <div>
+          <div class="ppdb-form" id="ppdb-form-wrap">
+            <h3>📝 Formulir Pendaftaran PPDB</h3>
+            <div class="form-section">
+              <div class="form-section-title">Data Siswa</div>
+              <div class="form-grid">
+                <div class="form-group"><label class="form-label">Nama Lengkap <span>*</span></label><input type="text" class="form-control" id="ppdb-nama" placeholder="Masukkan nama lengkap"></div>
+                <div class="form-group"><label class="form-label">NISN <span>*</span></label><input type="text" class="form-control" id="ppdb-nisn" placeholder="Nomor Induk Siswa Nasional"></div>
+                <div class="form-group"><label class="form-label">Tempat Lahir <span>*</span></label><input type="text" class="form-control" id="ppdb-ttl-kota" placeholder="Kota tempat lahir"></div>
+                <div class="form-group"><label class="form-label">Tanggal Lahir <span>*</span></label><input type="date" class="form-control" id="ppdb-ttl-tgl"></div>
+                <div class="form-group"><label class="form-label">Jenis Kelamin <span>*</span></label><select class="form-control" id="ppdb-jk"><option value="">-- Pilih --</option><option>Laki-laki</option><option>Perempuan</option></select></div>
+              </div>
+              <div class="form-group"><label class="form-label">Alamat Lengkap <span>*</span></label><textarea class="form-control" rows="2" id="ppdb-alamat" placeholder="Alamat lengkap siswa"></textarea></div>
+            </div>
+            <div class="form-section">
+              <div class="form-section-title">Data Orang Tua</div>
+              <div class="form-grid">
+                <div class="form-group"><label class="form-label">Nama Ayah <span>*</span></label><input type="text" class="form-control" id="ppdb-ayah" placeholder="Nama ayah kandung"></div>
+                <div class="form-group"><label class="form-label">Nama Ibu <span>*</span></label><input type="text" class="form-control" id="ppdb-ibu" placeholder="Nama ibu kandung"></div>
+                <div class="form-group"><label class="form-label">Nomor Telepon <span>*</span></label><input type="tel" class="form-control" id="ppdb-telp" placeholder="08xxxxxxxxxx"></div>
+              </div>
+            </div>
+            <div class="form-section">
+              <div class="form-section-title">Upload Dokumen</div>
+              <div class="form-grid">
+                <div class="form-group"><label class="form-label">Pas Foto <span>*</span></label><div class="upload-area" onclick="document.getElementById('file-foto').click()"><div class="upload-icon">🖼️</div><div class="upload-text">Klik untuk unggah pas foto (JPG/PNG)</div><input type="file" id="file-foto" accept="image/*" style="display:none"></div></div>
+                <div class="form-group"><label class="form-label">Kartu Keluarga <span>*</span></label><div class="upload-area" onclick="document.getElementById('file-kk').click()"><div class="upload-icon">📄</div><div class="upload-text">Klik untuk unggah Kartu Keluarga</div><input type="file" id="file-kk" accept="image/*,.pdf" style="display:none"></div></div>
+                <div class="form-group"><label class="form-label">Akta Kelahiran <span>*</span></label><div class="upload-area" onclick="document.getElementById('file-akta').click()"><div class="upload-icon">📋</div><div class="upload-text">Klik untuk unggah Akta Kelahiran</div><input type="file" id="file-akta" accept="image/*,.pdf" style="display:none"></div></div>
+              </div>
+            </div>
+            <button class="btn btn-primary btn-full" onclick="submitPPDB()" style="padding:1rem;font-size:1rem">📝 Kirim Pendaftaran</button>
+          </div>
+          <div class="ppdb-success" id="ppdb-success">
+            <div class="success-icon">🎉</div>
+            <h3 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:1.3rem;color:var(--text);margin-bottom:0.5rem">Pendaftaran Berhasil!</h3>
+            <p style="color:var(--text-muted)">Data Anda telah berhasil tersimpan. Simpan nomor pendaftaran berikut:</p>
+            <div class="success-number"><p>Nomor Pendaftaran Anda</p><strong id="ppdb-nomor"></strong></div>
+            <p style="color:var(--text-muted);font-size:0.85rem">Pantau status pendaftaran Anda secara berkala. Tim PPDB akan menghubungi Anda melalui nomor telepon yang telah didaftarkan.</p>
+            <button class="btn btn-outline" onclick="resetPPDB()" style="margin-top:1rem">Daftar Ulang</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LINK PENTING -->
+<div id="page-link" class="page-section" style="padding-top:70px">
+  <div style="background:linear-gradient(135deg,#1E3A8A,#2563EB);padding:4rem 1.5rem;text-align:center;color:white">
+    <h1 style="font-family:'Poppins',sans-serif;font-size:2rem;font-weight:800;margin:0.75rem 0">Link Penting</h1>
+    <p style="opacity:0.85">Pusat akses layanan digital SMPN 3 Karanglewas</p>
+  </div>
+  <div class="section">
+    <div class="section-inner">
+      <div class="link-category-grid" id="link-grid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- KONTAK -->
+<div id="page-kontak" class="page-section" style="padding-top:70px">
+  <div class="section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-eyebrow">Hubungi Kami</div>
+        <h2 class="section-title">Kontak Sekolah</h2>
+      </div>
+      <div class="kontak-grid">
+        <div>
+          <div class="kontak-items">
+            <div class="kontak-item"><div class="kontak-icon">📍</div><div><div class="kontak-item-title">Alamat</div><div class="kontak-item-val">Jl. Raya Karanglewas No. 1, Kec. Karanglewas, Kab. Banyumas, Jawa Tengah 53161</div></div></div>
+            <div class="kontak-item"><div class="kontak-icon">📞</div><div><div class="kontak-item-title">Telepon</div><div class="kontak-item-val">(0281) 655123</div></div></div>
+            <div class="kontak-item"><div class="kontak-icon">📧</div><div><div class="kontak-item-title">Email</div><div class="kontak-item-val">smpn3karanglewas@gmail.com</div></div></div>
+            <div class="kontak-item"><div class="kontak-icon">⏰</div><div><div class="kontak-item-title">Jam Operasional</div><div class="kontak-item-val">Senin–Kamis: 07.00–15.00 WIB<br>Jumat: 07.00–11.30 WIB</div></div></div>
+          </div>
+          <div class="kontak-sosmed">
+            <h4>Media Sosial</h4>
+            <div class="sosmed-links">
+              <a class="sosmed-link" href="#" title="Instagram">📸</a>
+              <a class="sosmed-link" href="#" title="Facebook">👤</a>
+              <a class="sosmed-link" href="#" title="YouTube">▶️</a>
+              <a class="sosmed-link" href="#" title="TikTok">🎵</a>
+            </div>
+          </div>
+          <div class="maps-embed">
+            <span style="font-size:3rem">🗺️</span>
+            <span>Peta Lokasi SMPN 3 Karanglewas</span>
+            <span style="font-size:0.78rem;opacity:0.7">Kec. Karanglewas, Kab. Banyumas</span>
+          </div>
+        </div>
+        <div class="kontak-form">
+          <h3>💌 Kirim Pesan</h3>
+          <div class="form-group"><label class="form-label">Nama Lengkap</label><input type="text" class="form-control" placeholder="Nama Anda"></div>
+          <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-control" placeholder="email@anda.com"></div>
+          <div class="form-group"><label class="form-label">Subjek</label><input type="text" class="form-control" placeholder="Subjek pesan"></div>
+          <div class="form-group"><label class="form-label">Pesan</label><textarea class="form-control" rows="5" placeholder="Tulis pesan Anda di sini..."></textarea></div>
+          <button class="btn btn-primary btn-full" style="padding:0.85rem" onclick="alert('Pesan berhasil terkirim! Kami akan merespon dalam 1x24 jam.')">📨 Kirim Pesan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <div class="footer-logo-icon">SMP3</div>
+        <div class="footer-logo-text">SMP Negeri 3 Karanglewas <small>Kab. Banyumas, Jawa Tengah</small></div>
+      </div>
+      <p class="footer-tagline">"Unggul dalam Prestasi, Berkarakter dalam Perilaku, dan Siap Menghadapi Masa Depan."</p>
+      <div class="footer-sosmed">
+        <a href="#" title="Instagram">📸</a>
+        <a href="#" title="Facebook">👤</a>
+        <a href="#" title="YouTube">▶️</a>
+        <a href="#" title="TikTok">🎵</a>
+      </div>
+    </div>
+    <div class="footer-section">
+      <h4>Navigasi</h4>
+      <ul class="footer-links">
+        <li><a href="#" onclick="showPage('beranda')">→ Beranda</a></li>
+        <li><a href="#" onclick="showPage('profil')">→ Profil Sekolah</a></li>
+        <li><a href="#" onclick="showPage('game')">→ Game Edukasi</a></li>
+        <li><a href="#" onclick="showPage('ekskul')">→ Ekstrakurikuler</a></li>
+        <li><a href="#" onclick="showPage('guru')">→ Ruang Guru</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>Layanan</h4>
+      <ul class="footer-links">
+        <li><a href="#" onclick="showPage('perpus')">→ Perpustakaan</a></li>
+        <li><a href="#" onclick="showPage('galeri')">→ Galeri</a></li>
+        <li><a href="#" onclick="showPage('ppdb')">→ PPDB Online</a></li>
+        <li><a href="#" onclick="showPage('link')">→ Link Penting</a></li>
+        <li><a href="#" onclick="showPage('kontak')">→ Kontak</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>Kontak</h4>
+      <ul class="footer-links">
+        <li><a href="#">📍 Kec. Karanglewas, Banyumas</a></li>
+        <li><a href="#">📞 (0281) 655123</a></li>
+        <li><a href="#">📧 smpn3@gmail.com</a></li>
+        <li><a href="#" onclick="openAdmin()">🔐 Admin Login</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 SMP Negeri 3 Karanglewas. Hak Cipta Dilindungi.</p>
+    <p>Dirancang dengan ❤️ untuk pendidikan berkualitas</p>
+  </div>
+</footer>
+
+<!-- Back To Top -->
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- WhatsApp -->
+<a id="wa-btn" href="https://wa.me/6281234567890" target="_blank" title="Chat WhatsApp">💬</a>
+
+<!-- ========== ADMIN PANEL ========== -->
+<div id="admin-panel">
+  <!-- Admin Login -->
+  <div id="admin-login" class="admin-login">
+    <div class="admin-login-box">
+      <div class="admin-login-logo">
+        <div class="logo-icon">SMP3</div>
+        <h2>Dashboard Admin</h2>
+        <p>SMP Negeri 3 Karanglewas</p>
+      </div>
+      <div class="admin-error" id="login-error">Username atau password salah!</div>
+      <div class="form-group"><label class="form-label">Username</label><input type="text" class="form-control" id="login-user" placeholder="admin" value="admin"></div>
+      <div class="form-group"><label class="form-label">Password</label><input type="password" class="form-control" id="login-pass" placeholder="••••••••" onkeypress="if(event.key==='Enter')doLogin()"></div>
+      <button class="btn btn-primary btn-full" style="padding:0.85rem;margin-top:0.5rem" onclick="doLogin()">🔐 Masuk Dashboard</button>
+      <p style="text-align:center;color:#64748B;font-size:0.78rem;margin-top:1rem">Demo: admin / admin123</p>
+      <button onclick="closeAdmin()" style="width:100%;margin-top:0.5rem;background:none;border:1px solid #E2E8F0;padding:0.6rem;border-radius:var(--radius);cursor:pointer;color:#64748B;font-size:0.85rem">← Kembali ke Website</button>
+    </div>
+  </div>
+
+  <!-- Admin Dashboard -->
+  <div id="admin-dashboard" style="display:none">
+    <div class="admin-layout">
+      <div class="admin-sidebar" id="adminSidebar">
+        <div class="admin-sidebar-header">
+          <div class="admin-sidebar-logo">SMPN 3 Karanglewas</div>
+          <div class="admin-sidebar-sub">Panel Administrator</div>
+        </div>
+        <nav class="admin-nav">
+          <div class="admin-nav-section">Utama</div>
+          <div class="admin-nav-link active" onclick="switchAdmin(this,'dashboard')"><span class="admin-nav-icon">📊</span> Dashboard</div>
+          <div class="admin-nav-section">Konten</div>
+          <div class="admin-nav-link" onclick="switchAdmin(this,'admin-berita')"><span class="admin-nav-icon">📰</span> Berita</div>
+          <div class="admin-nav-link" onclick="switchAdmin(this,'admin-guru')"><span class="admin-nav-icon">👩‍🏫</span> Data Guru</div>
+          <div class="admin-nav-link" onclick="switchAdmin(this,'admin-game')"><span class="admin-nav-icon">🎮</span> Game Edukasi</div>
+          <div class="admin-nav-link" onclick="switchAdmin(this,'admin-ekskul')"><span class="admin-nav-icon">⭐</span> Ekstrakurikuler</div>
+          <div class="admin-nav-link" onclick="switchAdmin(this,'admin-galeri')"><span class="admin-nav-icon">🖼️</span> Galeri</div>
+          <div class="admin-nav-link" onclick="switchAdmin(this,'admin-link')"><span class="admin-nav-icon">🔗</span> Link Penting</div>
+          <div class="admin-nav-section">Layanan</div>
+          <div class="admin-nav-link" onclick="switchAdmin(this,'admin-ppdb')"><span class="admin-nav-icon">📝</span> Data PPDB</div>
+          <div class="admin-nav-link" onclick="switchAdmin(this,'admin-perpus')"><span class="admin-nav-icon">📚</span> Perpustakaan</div>
+          <div class="admin-nav-section">Pengaturan</div>
+          <div class="admin-nav-link" onclick="switchAdmin(this,'admin-settings')"><span class="admin-nav-icon">⚙️</span> Pengaturan Website</div>
+          <div class="admin-nav-section">Akun</div>
+          <div class="admin-nav-link" onclick="closeAdmin()"><span class="admin-nav-icon">🌐</span> Lihat Website</div>
+          <div class="admin-nav-link" onclick="logout()"><span class="admin-nav-icon">🚪</span> Keluar</div>
+        </nav>
+      </div>
+      <div class="admin-main">
+        <div class="admin-header">
+          <h1 id="admin-page-title">Dashboard</h1>
+          <div style="display:flex;gap:0.75rem;align-items:center">
+            <span style="font-size:0.85rem;color:#64748B">👋 Selamat datang, Admin</span>
+          </div>
+        </div>
+
+        <!-- Dashboard Stats -->
+        <div id="admin-dashboard" class="admin-content active">
+          <div class="admin-stat-grid">
+            <div class="admin-stat"><div class="admin-stat-icon" style="background:#EFF6FF;color:#2563EB">📰</div><div><div class="admin-stat-num" id="stat-berita">5</div><div class="admin-stat-label">Total Berita</div></div></div>
+            <div class="admin-stat"><div class="admin-stat-icon" style="background:#F0FDF4;color:#16A34A">👩‍🏫</div><div><div class="admin-stat-num" id="stat-guru">12</div><div class="admin-stat-label">Guru Terdaftar</div></div></div>
+            <div class="admin-stat"><div class="admin-stat-icon" style="background:#FFF7ED;color:#EA580C">⭐</div><div><div class="admin-stat-num" id="stat-ekskul">6</div><div class="admin-stat-label">Ekstrakurikuler</div></div></div>
+            <div class="admin-stat"><div class="admin-stat-icon" style="background:#FDF4FF;color:#9333EA">🎮</div><div><div class="admin-stat-num" id="stat-game">8</div><div class="admin-stat-label">Game Edukasi</div></div></div>
+            <div class="admin-stat"><div class="admin-stat-icon" style="background:#F0FDF4;color:#16A34A">🖼️</div><div><div class="admin-stat-num" id="stat-galeri">12</div><div class="admin-stat-label">Foto Galeri</div></div></div>
+            <div class="admin-stat"><div class="admin-stat-icon" style="background:#EFF6FF;color:#2563EB">🔗</div><div><div class="admin-stat-num" id="stat-link">10</div><div class="admin-stat-label">Link Penting</div></div></div>
+            <div class="admin-stat"><div class="admin-stat-icon" style="background:#FEF2F2;color:#DC2626">📝</div><div><div class="admin-stat-num" id="stat-ppdb">0</div><div class="admin-stat-label">Pendaftar PPDB</div></div></div>
+          </div>
+          <div style="background:white;border:1px solid #E2E8F0;border-radius:var(--radius-lg);padding:1.5rem">
+            <h3 style="font-weight:700;color:#1E293B;margin-bottom:1rem">Panduan Penggunaan Dashboard</h3>
+            <p style="color:#64748B;font-size:0.9rem;line-height:1.7">Selamat datang di Dashboard Admin SMPN 3 Karanglewas. Gunakan menu di sebelah kiri untuk mengelola konten website. Anda dapat menambah, mengedit, dan menghapus data berita, guru, game edukasi, galeri, link penting, dan lainnya. Semua perubahan akan langsung terlihat di website utama.</p>
+          </div>
+        </div>
+
+        <!-- Admin Berita -->
+        <div id="admin-berita" class="admin-content">
+          <div class="admin-table-wrap">
+            <div class="admin-table-header">
+              <h3>Daftar Berita</h3>
+              <button class="btn btn-primary btn-sm" onclick="openAdminModal('berita',null)">+ Tambah Berita</button>
+            </div>
+            <table class="admin-table"><thead><tr><th>No</th><th>Judul</th><th>Kategori</th><th>Tanggal</th><th>Status</th><th>Aksi</th></tr></thead><tbody id="tabel-berita"></tbody></table>
+          </div>
+        </div>
+
+        <!-- Admin Guru -->
+        <div id="admin-guru" class="admin-content">
+          <div class="admin-table-wrap">
+            <div class="admin-table-header">
+              <h3>Data Guru</h3>
+              <button class="btn btn-primary btn-sm" onclick="openAdminModal('guru',null)">+ Tambah Guru</button>
+            </div>
+            <table class="admin-table"><thead><tr><th>No</th><th>Nama</th><th>Mata Pelajaran</th><th>Jabatan</th><th>Email</th><th>Aksi</th></tr></thead><tbody id="tabel-guru"></tbody></table>
+          </div>
+        </div>
+
+        <!-- Admin Game -->
+        <div id="admin-game" class="admin-content">
+          <div class="admin-table-wrap">
+            <div class="admin-table-header">
+              <h3>Game Edukasi</h3>
+              <button class="btn btn-primary btn-sm" onclick="openAdminModal('game',null)">+ Tambah Game</button>
+            </div>
+            <table class="admin-table"><thead><tr><th>No</th><th>Nama Game</th><th>Platform</th><th>Kategori</th><th>URL</th><th>Aksi</th></tr></thead><tbody id="tabel-game"></tbody></table>
+          </div>
+        </div>
+
+        <!-- Admin Ekskul -->
+        <div id="admin-ekskul" class="admin-content">
+          <div class="admin-table-wrap">
+            <div class="admin-table-header">
+              <h3>Ekstrakurikuler</h3>
+              <button class="btn btn-primary btn-sm" onclick="openAdminModal('ekskul',null)">+ Tambah Ekskul</button>
+            </div>
+            <table class="admin-table"><thead><tr><th>No</th><th>Nama</th><th>Pembina</th><th>Jadwal</th><th>Aksi</th></tr></thead><tbody id="tabel-ekskul"></tbody></table>
+          </div>
+        </div>
+
+        <!-- Admin Galeri -->
+        <div id="admin-galeri" class="admin-content">
+          <div class="admin-table-wrap">
+            <div class="admin-table-header">
+              <h3>Galeri Foto</h3>
+              <button class="btn btn-primary btn-sm" onclick="openAdminModal('galeri',null)">+ Tambah Foto</button>
+            </div>
+            <table class="admin-table"><thead><tr><th>No</th><th>Judul</th><th>Kategori</th><th>Tipe</th><th>Aksi</th></tr></thead><tbody id="tabel-galeri"></tbody></table>
+          </div>
+        </div>
+
+        <!-- Admin Link -->
+        <div id="admin-link" class="admin-content">
+          <div class="admin-table-wrap">
+            <div class="admin-table-header">
+              <h3>Link Penting</h3>
+              <button class="btn btn-primary btn-sm" onclick="openAdminModal('link',null)">+ Tambah Link</button>
+            </div>
+            <table class="admin-table"><thead><tr><th>No</th><th>Nama</th><th>Kategori</th><th>URL</th><th>Aksi</th></tr></thead><tbody id="tabel-link"></tbody></table>
+          </div>
+        </div>
+
+        <!-- Admin PPDB -->
+        <div id="admin-ppdb" class="admin-content">
+          <div class="admin-table-wrap">
+            <div class="admin-table-header">
+              <h3>Data Pendaftar PPDB</h3>
+              <span style="font-size:0.85rem;color:#64748B">Total: <strong id="ppdb-count">0</strong> pendaftar</span>
+            </div>
+            <table class="admin-table"><thead><tr><th>No. Daftar</th><th>Nama Siswa</th><th>NISN</th><th>Tgl Lahir</th><th>Telepon</th><th>Status</th></tr></thead><tbody id="tabel-ppdb"></tbody></table>
+          </div>
+        </div>
+
+        <!-- Admin Perpustakaan -->
+        <div id="admin-perpus" class="admin-content">
+          <div style="background:white;border:1px solid #E2E8F0;border-radius:var(--radius-lg);padding:2rem">
+            <h3 style="font-weight:700;color:#1E293B;margin-bottom:1.5rem">Pengaturan Perpustakaan Digital</h3>
+            <div class="form-group"><label class="form-label">Nama Perpustakaan</label><input type="text" class="form-control" id="set-perpus-nama" placeholder="Nama perpustakaan digital"></div>
+            <div class="form-group"><label class="form-label">Deskripsi</label><textarea class="form-control" rows="3" id="set-perpus-desc" placeholder="Deskripsi perpustakaan"></textarea></div>
+            <div class="form-group"><label class="form-label">URL Perpustakaan Digital <span style="color:#EF4444">*</span></label><input type="url" class="form-control" id="set-perpus-url" placeholder="https://perpustakaan.smpn3karanglewas.sch.id"></div>
+            <button class="btn btn-primary" onclick="savePerpusSettings()">💾 Simpan Pengaturan</button>
+          </div>
+        </div>
+
+        <!-- Admin Settings -->
+        <div id="admin-settings" class="admin-content">
+          <div style="background:white;border:1px solid #E2E8F0;border-radius:var(--radius-lg);padding:2rem">
+            <h3 style="font-weight:700;color:#1E293B;margin-bottom:1.5rem">Pengaturan Website</h3>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+              <div class="form-group"><label class="form-label">WhatsApp Admin</label><input type="text" class="form-control" id="set-wa" placeholder="628xxxxxxxxxx"></div>
+              <div class="form-group"><label class="form-label">Instagram</label><input type="url" class="form-control" id="set-ig" placeholder="https://instagram.com/..."></div>
+              <div class="form-group"><label class="form-label">Facebook</label><input type="url" class="form-control" id="set-fb" placeholder="https://facebook.com/..."></div>
+              <div class="form-group"><label class="form-label">YouTube</label><input type="url" class="form-control" id="set-yt" placeholder="https://youtube.com/..."></div>
+              <div class="form-group"><label class="form-label">Link E-Learning</label><input type="url" class="form-control" id="set-elearning" placeholder="https://elearning.smpn3karanglewas.sch.id"></div>
+              <div class="form-group"><label class="form-label">Link Alumni</label><input type="url" class="form-control" id="set-alumni" placeholder="https://alumni.smpn3karanglewas.sch.id"></div>
+            </div>
+            <button class="btn btn-primary" onclick="saveSettings()">💾 Simpan Semua Pengaturan</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Admin Modal -->
+<div class="admin-modal" id="adminModal">
+  <div class="admin-modal-box">
+    <div class="admin-modal-head">
+      <h3 id="modal-title">Tambah Data</h3>
+      <button class="admin-modal-close" onclick="closeAdminModal()">✕</button>
+    </div>
+    <div class="admin-modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
+ 
