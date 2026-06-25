@@ -22,14 +22,14 @@ const db = {
     {id:12,nama:'Wahyu Santoso, S.Pd.',mapel:'IPA',jabatan:'Guru',email:'wahyu.s@smpn3karanglewas.sch.id',emoji:'👨‍🏫'}
   ],
   game: [
-    {id:1,nama:'Wordwall - Kuis Matematika',platform:'Wordwall',kat:'Matematika',url:'https://wordwall.net',desc:'Kuis interaktif matematika dalam berbagai format permainan seru.',emoji:'🎯'},
-    {id:2,nama:'Quizizz - IPA SMP',platform:'Quizizz',kat:'IPA',url:'https://quizizz.com',desc:'Kuis IPA berbasis gamifikasi untuk belajar sains dengan menyenangkan.',emoji:'🔬'},
-    {id:3,nama:'Kahoot - Bahasa Indonesia',platform:'Kahoot',kat:'Bahasa',url:'https://kahoot.com',desc:'Game kuis bahasa Indonesia yang interaktif dan kompetitif.',emoji:'📝'},
-    {id:4,nama:'Educandy - Vocabulary Game',platform:'Educandy',kat:'Bahasa',url:'https://www.educandy.com',desc:'Game kosakata bahasa Inggris yang fun dan edukatif.',emoji:'🍬'},
-    {id:5,nama:'Bamboozle - IPS Quiz',platform:'Bamboozle',kat:'IPS',url:'https://www.bamboozle.it',desc:'Kuis IPS kelas 7-9 dalam format permainan tim yang seru.',emoji:'🌍'},
-    {id:6,nama:'Quizizz - PPKn',platform:'Quizizz',kat:'Umum',url:'https://quizizz.com',desc:'Materi PPKn dikemas dalam kuis interaktif yang menarik.',emoji:'🏛️'},
-    {id:7,nama:'Wordwall - Bahasa Inggris',platform:'Wordwall',kat:'Bahasa',url:'https://wordwall.net',desc:'Game vocabulary dan grammar bahasa Inggris interaktif.',emoji:'🗣️'},
-    {id:8,nama:'Kahoot - Sejarah Indonesia',platform:'Kahoot',kat:'IPS',url:'https://kahoot.com',desc:'Quiz sejarah Indonesia yang seru untuk belajar bersama.',emoji:'📜'}
+    {id:1,nama:'Matematika',kat:'Matematika',emoji:'🎯'},
+    {id:2,nama:'IPA',kat:'IPA',emoji:'🔬'},
+    {id:3,nama:'Bahasa Indonesia',kat:'Bahasa',emoji:'📝'},
+    {id:4,nama:'Pendidikan Agama',kat:'Bahasa',emoji:'🍬'},
+    {id:5,nama:'IPS Quiz',kat:'IPS',emoji:'🌍'},
+    {id:6,nama:'PPKn',kat:'Umum',emoji:'🏛️'},
+    {id:7,nama:'Bahasa Inggris',emoji:'🗣️'},
+    {id:8,nama:'Informatika',kat:'IPS',emoji:'📜'}
   ],
   ekskul: [
     {id:1,nama:'Pramuka',emoji:'⚜️',warna:'#F59E0B',pembina:'Kak Agus Santoso, S.Pd.',jadwal:'Jumat, 14.00 - 16.00 WIB',desc:'Kegiatan kepramukaan sebagai ekskul wajib yang membentuk karakter, kedisiplinan, dan jiwa sosial peserta didik.',prestasi:'Juara 1 Jambore Kab. Banyumas 2024'},
@@ -56,7 +56,7 @@ const db = {
   link: [
     {id:1,nama:'E-Learning',kat:'Akademik',icon:'💻',desc:'Platform belajar online sekolah',url:'https://elearning.smpn3karanglewas.sch.id'},
     {id:2,nama:'Google Classroom',kat:'Akademik',icon:'📚',desc:'Kelas virtual berbasis Google',url:'https://classroom.google.com'},
-    {id:3,nama:'Perpustakaan Digital',kat:'Akademik',icon:'📖',desc:'Akses koleksi buku digital',url:'https://perpus.smpn3karanglewas.sch.id'},
+    {id:3,nama:'Perpustakaan Digital',kat:'Akademik',icon:'📖',desc:'Akses koleksi buku digital',url:'https://s.id/PERPUSDIGITALSMPN3KARANGLEWAS'},
     {id:4,nama:'Portal Siswa',kat:'Akademik',icon:'👨‍🎓',desc:'Akses nilai dan informasi siswa',url:'#'},
     {id:5,nama:'Portal Guru',kat:'Akademik',icon:'👩‍🏫',desc:'Portal khusus tenaga pendidik',url:'#'},
     {id:6,nama:'ANBK',kat:'Pemerintah',icon:'📋',desc:'Asesmen Nasional Berbasis Komputer',url:'https://anbk.kemdikbud.go.id'},
@@ -66,7 +66,7 @@ const db = {
     {id:10,nama:'Alumni SMPN 3',kat:'Komunitas',icon:'🤝',desc:'Komunitas alumni sekolah',url:'#'}
   ],
   ppdb: [],
-  perpus: {nama:'Perpustakaan Digital SMPN 3 Karanglewas',desc:'Akses ribuan koleksi buku, jurnal, dan referensi digital.',url:'https://perpus.smpn3karanglewas.sch.id'},
+  perpus: {nama:'Perpustakaan Digital SMPN 3 Karanglewas',desc:'Akses ribuan koleksi buku, jurnal, dan referensi digital.',url:'https://s.id/PERPUSDIGITALSMPN3KARANGLEWAS'},
   prestasi: [
     {id:1,judul:'Juara 1 Olimpiade Matematika Kab. Banyumas',tahun:'2024',medal:'🥇'},
     {id:2,judul:'Juara 2 Turnamen Bola Voli Kecamatan',tahun:'2025',medal:'🥈'},
