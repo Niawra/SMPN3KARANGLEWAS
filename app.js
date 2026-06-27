@@ -194,31 +194,7 @@ function switchProfilTab(btn,id){
   if(el)el.classList.add('active');
 }
 
-// ===== PPDB =====
-function submitPPDB(){
-  const nama=document.getElementById('ppdb-nama').value;
-  const nisn=document.getElementById('ppdb-nisn').value;
-  const ttl=document.getElementById('ppdb-ttl-kota').value;
-  const tgl=document.getElementById('ppdb-ttl-tgl').value;
-  const jk=document.getElementById('ppdb-jk').value;
-  const alamat=document.getElementById('ppdb-alamat').value;
-  const ayah=document.getElementById('ppdb-ayah').value;
-  const ibu=document.getElementById('ppdb-ibu').value;
-  const telp=document.getElementById('ppdb-telp').value;
-  if(!nama||!nisn||!ttl||!tgl||!jk||!alamat||!ayah||!ibu||!telp){alert('Harap isi semua kolom yang wajib diisi!');return;}
-  const noPendaftaran='PPDB-2025-'+String(db.ppdb.length+1).padStart(4,'0');
-  db.ppdb.push({no:noPendaftaran,nama,nisn,tgl,telp,status:'Menunggu Verifikasi'});
-  document.getElementById('ppdb-nomor').textContent=noPendaftaran;
-  document.getElementById('ppdb-form-wrap').style.display='none';
-  document.getElementById('ppdb-success').classList.add('show');
-  updateAdminStats();
-}
-function resetPPDB(){
-  document.getElementById('ppdb-form-wrap').style.display='block';
-  document.getElementById('ppdb-success').classList.remove('show');
-  ['ppdb-nama','ppdb-nisn','ppdb-ttl-kota','ppdb-ttl-tgl','ppdb-alamat','ppdb-ayah','ppdb-ibu','ppdb-telp'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
-  document.getElementById('ppdb-jk').value='';
-}
+
 
 // ===== PAGINATION =====
 function renderPagination(containerId,total,current,cb){
