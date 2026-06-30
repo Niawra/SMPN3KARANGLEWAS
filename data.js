@@ -22,14 +22,15 @@ const db = {
     {id:12,nama:'Wahyu Santoso, S.Pd.',mapel:'IPA',jabatan:'Guru',email:'wahyu.s@smpn3karanglewas.sch.id',emoji:'👨‍🏫'}
   ],
   game: [
-    {id:1,nama:'Matematika',kat:'Matematika',emoji:'🎯'},
-    {id:2,nama:'IPA',kat:'IPA',emoji:'🔬'},
-    {id:3,nama:'Bahasa Indonesia',kat:'Bahasa',emoji:'📝'},
-    {id:4,nama:'Pendidikan Agama',kat:'Bahasa',emoji:'🍬'},
-    {id:5,nama:'IPS Quiz',kat:'IPS',emoji:'🌍'},
-    {id:6,nama:'PPKn',kat:'Umum',emoji:'🏛️'},
+    {id:1,nama:'Matematika',emoji:'🎯'},
+    {id:2,nama:'IPA',emoji:'🔬'},
+    {id:3,nama:'Bahasa Indonesia',emoji:'📝'},
+    {id:4,nama:'Pendidikan Agama',emoji:'🍬'},
+    {id:5,nama:'IPS',emoji:'🌍'},
+    {id:6,nama:'PPKn',emoji:'🏛️'},
     {id:7,nama:'Bahasa Inggris',emoji:'🗣️'},
-    {id:8,nama:'Informatika',kat:'IPS',emoji:'📜'}
+    {id:8,nama:'Informatika',emoji:'📜'},
+    {id:9,nama:'CBP Rupiah',emoji:'📜'}
   ],
   ekskul: [
     {id:1,nama:'Pramuka',emoji:'⚜️',warna:'#F59E0B',pembina:'Kak Agus Santoso, S.Pd.',jadwal:'Jumat, 14.00 - 16.00 WIB',desc:'Kegiatan kepramukaan sebagai ekskul wajib yang membentuk karakter, kedisiplinan, dan jiwa sosial peserta didik.',prestasi:'Juara 1 Jambore Kab. Banyumas 2024'},
