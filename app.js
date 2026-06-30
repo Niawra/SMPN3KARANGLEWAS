@@ -105,13 +105,13 @@ function renderGuru(){
   const pages=Math.ceil(list.length/guruPerPage);
   const slice=list.slice((guruPage-1)*guruPerPage,guruPage*guruPerPage);
   const grid=document.getElementById('guru-grid');
-  if(grid) grid.innerHTML=slice.map(g=>`<div class="guru-card"><div class="guru-photo">${g.emoji}</div><div class="guru-name">${g.nama}</div><div class="guru-mapel">${g.mapel}</div><div class="guru-jabatan">${g.jabatan}</div><div style="font-size:0.78rem;color:var(--text-muted);margin-top:0.25rem">✉️ ${g.email}</div></div>`).join('');
+  if(grid) grid.innerHTML=slice.map(g=>`<div class="guru-card"><div class="guru-photo">${g.emoji}</div><div class="guru-name">${g.nama}</div><div class="guru-mapel">${g.mapel}</div><div style="font-size:0.78rem;color:var(--text-muted);margin-top:0.25rem">✉️ ${g.email}</div></div>`).join('');
   renderPagination('guru-pagination',pages,guruPage,p=>{guruPage=p;renderGuru();});
 }
 function filterGuru(){guruPage=1;renderGuru();}
 function renderProfilGuru(){
   const g=document.getElementById('guru-profil-grid');
-  if(g) g.innerHTML=db.guru.map(gu=>`<div class="guru-card"><div class="guru-photo">${gu.emoji}</div><div class="guru-name">${gu.nama}</div><div class="guru-mapel">${gu.mapel}</div><div class="guru-jabatan">${gu.jabatan}</div></div>`).join('');
+  if(g) g.innerHTML=db.guru.map(gu=>`<div class="guru-card"><div class="guru-photo">${gu.emoji}</div></div>`).join('');
 }
 
 // ===== GAME =====
@@ -246,7 +246,7 @@ function renderAdminTables(){
   if(tb)tb.innerHTML=db.berita.map((b,i)=>`<tr><td>${i+1}</td><td>${b.judul}</td><td><span class="badge badge-blue">${b.kat}</span></td><td>${formatDate(b.tgl)}</td><td><span class="badge badge-green">${b.status}</span></td><td><div class="admin-actions"><button class="btn-admin btn-edit" onclick="openAdminModal('berita',${b.id})">Edit</button><button class="btn-admin btn-delete" onclick="deleteItem('berita',${b.id})">Hapus</button></div></td></tr>`).join('');
   // Guru table
   const tg=document.getElementById('tabel-guru');
-  if(tg)tg.innerHTML=db.guru.map((g,i)=>`<tr><td>${i+1}</td><td>${g.nama}</td><td>${g.mapel}</td><td>${g.jabatan}</td><td style="font-size:0.8rem">${g.email}</td><td><div class="admin-actions"><button class="btn-admin btn-edit" onclick="openAdminModal('guru',${g.id})">Edit</button><button class="btn-admin btn-delete" onclick="deleteItem('guru',${g.id})">Hapus</button></div></td></tr>`).join('');
+  if(tg)tg.innerHTML=db.guru.map((g,i)=>`<tr><td>${i+1}</td><td>${g.nama}</td><td>${g.mapel}</td><td style="font-size:0.8rem">${g.email}</td><td><div class="admin-actions"><button class="btn-admin btn-edit" onclick="openAdminModal('guru',${g.id})">Edit</button><button class="btn-admin btn-delete" onclick="deleteItem('guru',${g.id})">Hapus</button></div></td></tr>`).join('');
   // Game table
   const tgm=document.getElementById('tabel-game');
   if(tgm)tgm.innerHTML=db.game.map((g,i)=>`<tr><td>${i+1}</td><td>${g.nama}</td><td><span class="badge badge-blue">${g.platform}</span></td><td>${g.kat}</td><td style="font-size:0.8rem;max-width:150px;overflow:hidden;text-overflow:ellipsis">${g.url}</td><td><div class="admin-actions"><button class="btn-admin btn-edit" onclick="openAdminModal('game',${g.id})">Edit</button><button class="btn-admin btn-delete" onclick="deleteItem('game',${g.id})">Hapus</button></div></td></tr>`).join('');
@@ -278,8 +278,8 @@ function openAdminModal(type,id){
   let html='';
   if(type==='berita'){
     html=`<div class="form-group"><label class="form-label">Judul Berita</label><input class="form-control" id="m-judul" value="${isEdit?(item?.judul||''):''}"></div><div class="form-group"><label class="form-label">Kategori</label><select class="form-control" id="m-kat"><option>Pengumuman</option><option>Prestasi</option><option>Kegiatan</option><option>Pendidikan</option><option>Olahraga</option></select></div><div class="form-group"><label class="form-label">Tanggal</label><input type="date" class="form-control" id="m-tgl" value="${isEdit?(item?.tgl||''):''}"></div><div class="form-group"><label class="form-label">Isi Berita</label><textarea class="form-control" rows="4" id="m-isi">${isEdit?(item?.isi||''):''}</textarea></div>`;
-  }else if(type==='guru'){
-    html=`<div class="form-group"><label class="form-label">Nama Lengkap</label><input class="form-control" id="m-nama" value="${isEdit?(item?.nama||''):''}"></div><div class="form-group"><label class="form-label">Mata Pelajaran</label><input class="form-control" id="m-mapel" value="${isEdit?(item?.mapel||''):''}"></div><div class="form-group"><label class="form-label">Jabatan</label><input class="form-control" id="m-jabatan" value="${isEdit?(item?.jabatan||''):''}"></div><div class="form-group"><label class="form-label">Email</label><input type="email" class="form-control" id="m-email" value="${isEdit?(item?.email||''):''}"></div>`;
+
+
   }else if(type==='game'){
     html=`<div class="form-group"><label class="form-label">Nama Game</label><input class="form-control" id="m-nama" value="${isEdit?(item?.nama||''):''}"></div><div class="form-group"><label class="form-label">Platform</label><select class="form-control" id="m-platform"><option>Wordwall</option><option>Quizizz</option><option>Kahoot</option><option>Educandy</option><option>Bamboozle</option><option>Lainnya</option></select></div><div class="form-group"><label class="form-label">Kategori</label><select class="form-control" id="m-kat"><option>Matematika</option><option>IPA</option><option>Bahasa</option><option>IPS</option><option>Umum</option></select></div><div class="form-group"><label class="form-label">URL Game</label><input type="url" class="form-control" id="m-url" value="${isEdit?(item?.url||''):''}"></div><div class="form-group"><label class="form-label">Deskripsi</label><textarea class="form-control" rows="2" id="m-desc">${isEdit?(item?.desc||''):''}</textarea></div>`;
   }else if(type==='link'){
@@ -299,7 +299,7 @@ function saveAdminModal(){
   let obj={id:newId};
   const g=i=>document.getElementById(i)?.value||'';
   if(type==='berita')obj={...obj,judul:g('m-judul'),kat:g('m-kat'),tgl:g('m-tgl')||new Date().toISOString().split('T')[0],isi:g('m-isi'),status:'Aktif',emoji:'📰'};
-  else if(type==='guru')obj={...obj,nama:g('m-nama'),mapel:g('m-mapel'),jabatan:g('m-jabatan'),email:g('m-email'),emoji:'👩‍🏫'};
+  else if(type==='guru')obj={...obj,nama:g('m-nama'),mapel:g('m-mapel'),email:g('m-email'),emoji:'👩‍🏫'};
   else if(type==='game')obj={...obj,nama:g('m-nama'),platform:g('m-platform'),kat:g('m-kat'),url:g('m-url'),desc:g('m-desc'),emoji:'🎮'};
   else if(type==='link')obj={...obj,nama:g('m-nama'),kat:g('m-kat'),icon:g('m-icon'),url:g('m-url'),desc:g('m-desc')};
   else if(type==='galeri')obj={...obj,judul:g('m-judul'),kat:g('m-kat'),tipe:g('m-tipe'),emoji:g('m-emoji'),tinggi:'short'};
