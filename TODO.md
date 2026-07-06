@@ -1,18 +1,17 @@
-# TODO - Update Game Edukasi (Pilih Kelas)
+# TODO - Admin dapat upload file gambar untuk Galeri
 
 ## Rencana
-1. (Data) Ubah struktur soal untuk semua game kecuali **CBP Rupiah** menjadi berbasis kelas (7/8/9).
-   - Informatika: soal lama dipindah ke kelas 7.
-   - Kelas 8/9 dibuat kosong.
-2. (UI) Tambahkan modal “Pilih Kelas” di `index.html` pada halaman Game Edukasi.
-3. (Logic) Perbarui flow di `app.js`:
-   - Saat klik “Daftar Soal” untuk game non-CBP → tampilkan modal pilih kelas.
-   - Saat pilih kelas → buka `page-bank-soal` dan tampilkan soal sesuai kelas.
-   - Untuk CBP Rupiah → tetap langsung tampil daftar soal (tanpa modal kelas).
-4. (Render) Update `renderSoalLinks()` di `app.js` agar mengambil soal sesuai kelas.
-5. (Styling) Jika perlu, tambah style modal pilih kelas di `style.css`.
-6. (Test) Verifikasi:
-   - Informatika kelas 7 tampil 3 soal.
-   - Informatika kelas 8/9 kosong.
-   - CBP Rupiah tidak ada modal kelas.
+1. Update `app.js` agar modal admin galeri memiliki field upload gambar (`input type=file`).
+2. Simpan gambar ke `db.galeri[*].img` dalam bentuk Base64 (`FileReader.readAsDataURL`).
+3. Update `renderGaleri()` agar thumbnail dan lightbox menampilkan gambar asli bila `g.tipe==='foto'` dan `g.img` tersedia.
+4. Update `openLightbox()` agar untuk foto menampilkan gambar besar; untuk video tetap fallback ke emoji/overlay.
+5. Pastikan edit item galeri mempertahankan gambar lama jika admin tidak memilih file baru.
+6. Testing manual: tambah/edit galeri foto dan pastikan setelah logout tampil di menu utama.
+
+## Status
+- [ ] Implementasi input upload + preview (modal admin galeri)
+- [ ] Implementasi penyimpanan Base64 ke `db.galeri[*].img`
+- [ ] Render thumbnail & lightbox pakai `img`
+- [ ] Pertahankan `img` saat edit tanpa ganti file
+- [ ] Testing manual
 
