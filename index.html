@@ -188,7 +188,6 @@ berbudi luhur, cinta tanah air dan berbudaya lingkungan."</em></p>
         <h2 class="section-title">Pertanyaan Umum</h2>
       </div>
       <div style="max-width:700px;margin:0 auto">
-       
         <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Apa saja ekstrakurikuler yang tersedia? <span class="faq-icon">+</span></div><div class="faq-a">SMP Negeri 3 Karanglewas memiliki 6 ekstrakurikuler: Pramuka, Bola Voli, PMR, Sepak Bola, Seni Tari, dan Hadroh. Setiap siswa diwajibkan mengikuti minimal satu ekstrakurikuler.</div></div>
         <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Bagaimana cara menghubungi sekolah? <span class="faq-icon">+</span></div><div class="faq-a">Anda dapat menghubungi sekolah melalui telepon di nomor (0281) 655123, email di  smpn3.karanglewas2025@gmail.com, atau kunjungi langsung di Jl. Raya Karanglewas, Kab. Banyumas.</div></div>
         <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Apakah ada beasiswa yang tersedia? <span class="faq-icon">+</span></div><div class="faq-a">Ya, sekolah memiliki beberapa program beasiswa antara lain PIP (Program Indonesia Pintar), beasiswa prestasi, dan beasiswa kurang mampu. Hubungi bagian TU untuk informasi lebih lanjut.</div></div>
@@ -215,7 +214,6 @@ berbudi luhur, cinta tanah air dan berbudaya lingkungan."</em></p>
         <button class="profil-tab" onclick="switchProfilTab(this,'prestasi-list')">🏆 Prestasi</button>
         <button class="profil-tab" onclick="switchProfilTab(this,'fasilitas-list')">🏛️ Fasilitas</button>
       </div>
-
 
       <div id="profil-visi-misi" class="profil-content">
         <div class="visi-misi-card">
@@ -302,6 +300,7 @@ berbudi luhur, cinta tanah air dan berbudaya lingkungan."</em></p>
           <div class="fasilitas-item"><span class="fasilitas-icon">🅿️</span><span class="fasilitas-text">Area Parkir Luas</span></div>
         </div>
       </div>
+
     </div>
   </div>
 </div>
@@ -328,6 +327,23 @@ berbudi luhur, cinta tanah air dan berbudaya lingkungan."</em></p>
       </div>
       <div class="grid-4" id="game-grid"></div>
       <div class="pagination" id="game-pagination"></div>
+    </div>
+  </div>
+</div>
+
+<!-- BANK SOAL (HALAMAN BARU UNTUK LINKS SOAL PER GAME) -->
+<div id="page-bank-soal" class="page-section" style="padding-top:70px">
+  <div style="background:linear-gradient(135deg,#1E3A8A,#2563EB);padding:4rem 1.5rem;text-align:center;color:white">
+    <div class="section-eyebrow" style="background:rgba(255,255,255,0.15);color:white">Bank Soal</div>
+    <h1 style="font-family:'Poppins',sans-serif;font-size:2rem;font-weight:800;margin:0.75rem 0" id="soal-page-title">Daftar Soal</h1>
+    <p style="opacity:0.85">Kumpulan link soal yang bisa dibuka langsung</p>
+  </div>
+  <div class="section">
+    <div class="section-inner">
+      <div style="display:flex;gap:1rem;align-items:center;justify-content:flex-start;margin-bottom:1.25rem;flex-wrap:wrap">
+        <button class="btn btn-outline" onclick="showPage('game')">← Kembali ke Game</button>
+      </div>
+      <div id="soal-links-wrap"></div>
     </div>
   </div>
 </div>
@@ -390,8 +406,6 @@ berbudi luhur, cinta tanah air dan berbudaya lingkungan."</em></p>
         <p id="perpus-desc">Akses ribuan koleksi buku, jurnal, dan referensi digital untuk mendukung kegiatan belajar mengajar. Tersedia 24 jam melalui platform perpustakaan digital kami.</p>
         <button class="btn-hero-primary" onclick="openPerpus()">📚 Masuk Perpustakaan Digital</button>
       </div>
-      
-      </div>
     </div>
   </div>
 </div>
@@ -426,6 +440,36 @@ berbudi luhur, cinta tanah air dan berbudaya lingkungan."</em></p>
   </div>
 </div>
 
+<!-- GAME MATA PELAJARAN MODAL (TETAP ADA) -->
+<div class="game-mapel-modal" id="gameMapelModal" onclick="closeGameMapelModal()">
+  <div class="game-mapel-modal-box" onclick="event.stopPropagation()">
+    <div class="game-mapel-modal-head">
+      <div>
+        <div class="game-mapel-title" id="gameMapelTitle">Detail Mata Pelajaran</div>
+        <div class="game-mapel-sub" id="gameMapelSub">—</div>
+      </div>
+      <button class="game-mapel-modal-close" onclick="closeGameMapelModal()">✕</button>
+    </div>
+
+    <div class="game-mapel-modal-body">
+      <div class="game-mapel-qr-wrap">
+        <div class="game-mapel-qr-label">Scan QR untuk membuka materi</div>
+        <div class="game-mapel-qr" id="gameMapelQR"></div>
+      </div>
+
+      <div class="game-mapel-link-wrap">
+        <div class="game-mapel-link-label">Link Materi</div>
+        <div class="game-mapel-link-url" id="gameMapelLinkText">—</div>
+        <div class="game-mapel-link-actions">
+          <a class="btn btn-primary" id="gameMapelOpenLink" href="#" target="_blank" rel="noopener">Buka Link →</a>
+          <button class="btn btn-outline" onclick="copyGameMapelLink()">Salin Link</button>
+        </div>
+        <div class="game-mapel-link-hint">Catatan: QR akan diarahkan ke link materi yang sudah disediakan.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- PPDB -->
 <div id="page-ppdb" class="page-section" style="padding-top:70px">
   <div class="section ppdb-section">
@@ -437,17 +481,17 @@ berbudi luhur, cinta tanah air dan berbudaya lingkungan."</em></p>
       </div>
       <div class="ppdb-wrapper">
         <div class="ppdb-info">
-         
-          <div class="ppdb-steps">
-
-          </div>
+          <div class="ppdb-steps"></div>
           <div style="margin-top:2rem;padding:1rem;background:rgba(37,99,235,0.08);border-radius:var(--radius);border:1px solid rgba(37,99,235,0.2)">
             <strong style="color:var(--primary);display:block;margin-bottom:0.5rem">📅 Jadwal PPDB</strong>
             <p style="color:var(--text-muted);font-size:0.85rem">Pendaftaran: 1 Juni – 30 Juni 2025<br>Seleksi: 1 – 5 Juli 2025<br>Pengumuman: 8 Juli 2025<br>Daftar Ulang: 9 – 14 Juli 2025</p>
           </div>
         </div>
-        <div>
-
+        <div></div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- LINK PENTING -->
 <div id="page-link" class="page-section" style="padding-top:70px">
@@ -633,32 +677,6 @@ berbudi luhur, cinta tanah air dan berbudaya lingkungan."</p>
             <div class="admin-stat"><div class="admin-stat-icon" style="background:#EFF6FF;color:#2563EB">🔗</div><div><div class="admin-stat-num" id="stat-link">10</div><div class="admin-stat-label">Link Penting</div></div></div>
             <div class="admin-stat"><div class="admin-stat-icon" style="background:#FEF2F2;color:#DC2626">📝</div><div><div class="admin-stat-num" id="stat-ppdb">0</div><div class="admin-stat-label">Pendaftar PPDB</div></div></div>
           </div>
-          <div style="background:white;border:1px solid #E2E8F0;border-radius:var(--radius-lg);padding:1.5rem">
-            <h3 style="font-weight:700;color:#1E293B;margin-bottom:1rem">Panduan Penggunaan Dashboard</h3>
-            <p style="color:#64748B;font-size:0.9rem;line-height:1.7">Selamat datang di Dashboard Admin SMPN 3 Karanglewas. Gunakan menu di sebelah kiri untuk mengelola konten website. Anda dapat menambah, mengedit, dan menghapus data berita, guru, game edukasi, galeri, link penting, dan lainnya. Semua perubahan akan langsung terlihat di website utama.</p>
-          </div>
-        </div>
-
-        <!-- Admin Berita -->
-        <div id="admin-berita" class="admin-content">
-          <div class="admin-table-wrap">
-            <div class="admin-table-header">
-              <h3>Daftar Berita</h3>
-              <button class="btn btn-primary btn-sm" onclick="openAdminModal('berita',null)">+ Tambah Berita</button>
-            </div>
-            <table class="admin-table"><thead><tr><th>No</th><th>Judul</th><th>Kategori</th><th>Tanggal</th><th>Status</th><th>Aksi</th></tr></thead><tbody id="tabel-berita"></tbody></table>
-          </div>
-        </div>
-
-        <!-- Admin Guru -->
-        <div id="admin-guru" class="admin-content">
-          <div class="admin-table-wrap">
-            <div class="admin-table-header">
-              <h3>Data Guru</h3>
-              <button class="btn btn-primary btn-sm" onclick="openAdminModal('guru',null)">+ Tambah Guru</button>
-            </div>
-            <table class="admin-table"><thead><tr><th>No</th><th>Nama</th><th>Mata Pelajaran</th><th>Jabatan</th><th>Email</th><th>Aksi</th></tr></thead><tbody id="tabel-guru"></tbody></table>
-          </div>
         </div>
 
         <!-- Admin Game -->
@@ -672,7 +690,27 @@ berbudi luhur, cinta tanah air dan berbudaya lingkungan."</p>
           </div>
         </div>
 
-        <!-- Admin Ekskul -->
+        <!-- Admin lainnya: biarkan sama seperti sebelumnya (di project kamu) -->
+        <div id="admin-berita" class="admin-content">
+          <div class="admin-table-wrap">
+            <div class="admin-table-header">
+              <h3>Daftar Berita</h3>
+              <button class="btn btn-primary btn-sm" onclick="openAdminModal('berita',null)">+ Tambah Berita</button>
+            </div>
+            <table class="admin-table"><thead><tr><th>No</th><th>Judul</th><th>Kategori</th><th>Tanggal</th><th>Status</th><th>Aksi</th></tr></thead><tbody id="tabel-berita"></tbody></table>
+          </div>
+        </div>
+
+        <div id="admin-guru" class="admin-content">
+          <div class="admin-table-wrap">
+            <div class="admin-table-header">
+              <h3>Data Guru</h3>
+              <button class="btn btn-primary btn-sm" onclick="openAdminModal('guru',null)">+ Tambah Guru</button>
+            </div>
+            <table class="admin-table"><thead><tr><th>No</th><th>Nama</th><th>Mata Pelajaran</th><th>Jabatan</th><th>Email</th><th>Aksi</th></tr></thead><tbody id="tabel-guru"></tbody></table>
+          </div>
+        </div>
+
         <div id="admin-ekskul" class="admin-content">
           <div class="admin-table-wrap">
             <div class="admin-table-header">
@@ -683,7 +721,6 @@ berbudi luhur, cinta tanah air dan berbudaya lingkungan."</p>
           </div>
         </div>
 
-        <!-- Admin Galeri -->
         <div id="admin-galeri" class="admin-content">
           <div class="admin-table-wrap">
             <div class="admin-table-header">
@@ -694,7 +731,6 @@ berbudi luhur, cinta tanah air dan berbudaya lingkungan."</p>
           </div>
         </div>
 
-        <!-- Admin Link -->
         <div id="admin-link" class="admin-content">
           <div class="admin-table-wrap">
             <div class="admin-table-header">
@@ -705,7 +741,6 @@ berbudi luhur, cinta tanah air dan berbudaya lingkungan."</p>
           </div>
         </div>
 
-        <!-- Admin PPDB -->
         <div id="admin-ppdb" class="admin-content">
           <div class="admin-table-wrap">
             <div class="admin-table-header">
@@ -716,7 +751,6 @@ berbudi luhur, cinta tanah air dan berbudaya lingkungan."</p>
           </div>
         </div>
 
-        <!-- Admin Perpustakaan -->
         <div id="admin-perpus" class="admin-content">
           <div style="background:white;border:1px solid #E2E8F0;border-radius:var(--radius-lg);padding:2rem">
             <h3 style="font-weight:700;color:#1E293B;margin-bottom:1.5rem">Pengaturan Perpustakaan Digital</h3>
@@ -727,7 +761,6 @@ berbudi luhur, cinta tanah air dan berbudaya lingkungan."</p>
           </div>
         </div>
 
-        <!-- Admin Settings -->
         <div id="admin-settings" class="admin-content">
           <div style="background:white;border:1px solid #E2E8F0;border-radius:var(--radius-lg);padding:2rem">
             <h3 style="font-weight:700;color:#1E293B;margin-bottom:1.5rem">Pengaturan Website</h3>
@@ -763,4 +796,4 @@ berbudi luhur, cinta tanah air dan berbudaya lingkungan."</p>
 <script src="app.js"></script>
 </body>
 </html>
- 
+

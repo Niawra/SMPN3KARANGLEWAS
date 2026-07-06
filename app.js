@@ -116,6 +116,122 @@ function renderProfilGuru(){
 
 // ===== GAME =====
 let gamePage=1;const gamePerPage=8;
+function openGameMapelModal(game){
+  if(!game) return;
+  const modal=document.getElementById('gameMapelModal');
+  const title=document.getElementById('gameMapelTitle');
+  const sub=document.getElementById('gameMapelSub');
+  const qrWrap=document.getElementById('gameMapelQR');
+  const linkText=document.getElementById('gameMapelLinkText');
+  const openLink=document.getElementById('gameMapelOpenLink');
+  if(!modal||!qrWrap) return;
+
+  const materiUrl=(game.materiUrl && game.materiUrl.trim()) ? game.materiUrl : (game.url || '');
+  title.textContent=game.nama || 'Mata Pelajaran';
+  sub.textContent=`${game.kat || ''} • ${game.platform || ''}`.trim();
+  linkText.textContent=materiUrl || '—';
+  if(openLink){
+    openLink.href=materiUrl || '#';
+    openLink.style.pointerEvents = materiUrl ? 'auto' : 'none';
+  }
+
+  // QR menggunakan layanan gambar QR (tanpa library)
+  // Pastikan materiUrl di-encode agar aman untuk query string.
+  const data=encodeURIComponent(materiUrl || '');
+  const qrUrl = materiUrl ? `https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=${data}` : '';
+  qrWrap.innerHTML = qrUrl ? `<img src="${qrUrl}" alt="QR ${game.nama}" style="width:100%;max-width:320px; height:auto; border-radius:12px; background:white; padding:8px;">` : '<div style="color:var(--text-muted);text-align:center">URL materi belum tersedia.</div>';
+
+  modal.classList.add('open');
+}
+
+function closeGameMapelModal(){
+  const modal=document.getElementById('gameMapelModal');
+  if(modal) modal.classList.remove('open');
+}
+
+async function copyGameMapelLink(){
+  const linkText=document.getElementById('gameMapelLinkText')?.textContent || '';
+  if(!linkText || linkText==='—') return;
+  try{
+    await navigator.clipboard.writeText(linkText);
+    alert('Link berhasil disalin!');
+  }catch(e){
+    // Fallback sederhana
+    const tmp=document.createElement('textarea');
+    tmp.value=linkText;
+    document.body.appendChild(tmp);
+    tmp.select();
+    document.execCommand('copy');
+    tmp.remove();
+    alert('Link berhasil disalin!');
+  }
+}
+
+// ===== GAME -> BANK SOAL =====
+let gameSoalCurrentGameId = null;
+
+function openGameSoalPage(gameId){
+  gameSoalCurrentGameId = gameId;
+  showPage('bank-soal');
+  renderSoalLinks();
+} 
+
+function renderSoalLinks(){
+  const wrap=document.getElementById('soal-links-wrap');
+  const titleEl=document.getElementById('soal-page-title');
+  if(!wrap || !titleEl) return;
+
+  const game=db.game.find(g=>g.id===gameSoalCurrentGameId);
+  if(!game){
+    titleEl.textContent='Daftar Soal';
+    wrap.innerHTML='<p style="color:var(--text-muted)">Game belum dipilih.</p>';
+    return;
+  }
+
+  titleEl.textContent=`Daftar Soal - ${game.nama}`;
+
+  const links=Array.isArray(game.soalLinks)?game.soalLinks:[];
+  if(!links.length){
+    wrap.innerHTML='<p style="color:var(--text-muted)">Belum ada link soal untuk game ini. Silakan isi dari Admin.</p>';
+    return;
+  }
+
+  wrap.innerHTML = links.map((s,idx)=>{
+    const nama=s.nama||`Soal ${idx+1}`;
+    const url=s.url||'';
+    const desc=s.desc||'';
+    return `
+      <div class="soal-card">
+        <div class="soal-card-head">
+          <div class="soal-card-title">${nama}</div>
+          <div class="soal-card-cat">${game.kat || 'Soal'}</div>
+        </div>
+        ${desc?`<div class="soal-card-desc">${desc}</div>`:''}
+        <div class="soal-card-actions">
+          <a class="btn btn-primary btn-sm" href="${url}" target="_blank" rel="noopener" style="pointer-events:${url?'auto':'none'}">Buka Soal →</a>
+          <button class="btn btn-outline btn-sm" onclick="copySoalLink('${url}')">Salin Link</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+async function copySoalLink(url){
+  if(!url) return;
+  try{
+    await navigator.clipboard.writeText(url);
+    alert('Link soal berhasil disalin!');
+  }catch(e){
+    const tmp=document.createElement('textarea');
+    tmp.value=url;
+    document.body.appendChild(tmp);
+    tmp.select();
+    document.execCommand('copy');
+    tmp.remove();
+    alert('Link soal berhasil disalin!');
+  }
+}
+
 function renderGames(){
   const search=document.getElementById('gameSearch')?.value.toLowerCase()||'';
   const kat=document.getElementById('gameKat')?.value||'';
@@ -123,10 +239,18 @@ function renderGames(){
   const pages=Math.ceil(list.length/gamePerPage);
   const slice=list.slice((gamePage-1)*gamePerPage,gamePage*gamePerPage);
   const grid=document.getElementById('game-grid');
-  if(grid) grid.innerHTML=slice.map(g=>`<div class="game-card"><div class="game-thumb">${g.emoji}<span class="game-platform">${g.platform}</span></div><div class="game-body"><div class="game-cat">${g.kat}</div><div class="game-title">${g.nama}</div><div class="game-desc">${g.desc}</div><a href="${g.url}" target="_blank" class="btn btn-primary btn-sm btn-full">▶ Mainkan</a></div></div>`).join('');
+  if(grid) grid.innerHTML=slice.map(g=>`<div class="game-card"><div class="game-thumb">${g.emoji}<span class="game-platform">${g.platform}</span></div><div class="game-body"><div class="game-cat">${g.kat}</div><div class="game-title">${g.nama}</div><div class="game-desc">${g.desc}</div><div style="display:flex;gap:0.6rem;flex-wrap:wrap"><button class="btn btn-primary btn-sm" style="flex:1 1 160px" onclick="openGameSoalPage(${g.id})">🧾 Daftar Soal</button></div></div></div></div>`).join('');
+  // pagination
   renderPagination('game-pagination',pages,gamePage,p=>{gamePage=p;renderGames();});
 }
 function filterGames(){gamePage=1;renderGames();}
+
+// support openGameMapelModal with id
+window.openGameMapelModal = function(gameId){
+  const game = typeof gameId === 'number' ? db.game.find(g=>g.id===gameId) : db.game.find(g=>g.id==gameId);
+  return openGameMapelModal(game);
+};
+
 
 // ===== EKSKUL =====
 function renderEkskul(){
@@ -281,7 +405,9 @@ function openAdminModal(type,id){
 
 
   }else if(type==='game'){
-    html=`<div class="form-group"><label class="form-label">Nama Game</label><input class="form-control" id="m-nama" value="${isEdit?(item?.nama||''):''}"></div><div class="form-group"><label class="form-label">Platform</label><select class="form-control" id="m-platform"><option>Wordwall</option><option>Quizizz</option><option>Kahoot</option><option>Educandy</option><option>Bamboozle</option><option>Lainnya</option></select></div><div class="form-group"><label class="form-label">Kategori</label><select class="form-control" id="m-kat"><option>Matematika</option><option>IPA</option><option>Bahasa</option><option>IPS</option><option>Umum</option></select></div><div class="form-group"><label class="form-label">URL Game</label><input type="url" class="form-control" id="m-url" value="${isEdit?(item?.url||''):''}"></div><div class="form-group"><label class="form-label">Deskripsi</label><textarea class="form-control" rows="2" id="m-desc">${isEdit?(item?.desc||''):''}</textarea></div>`;
+    const soalLinks = (isEdit && item?.soalLinks) ? item.soalLinks : [];
+    const soalRaw = soalLinks.map(s => `${s.nama||''}|${s.url||''}${s.desc?`|${s.desc}`:''}`).join('\n');
+    html=`<div class="form-group"><label class="form-label">Nama Game</label><input class="form-control" id="m-nama" value="${isEdit?(item?.nama||''):''}"></div><div class="form-group"><label class="form-label">Platform</label><select class="form-control" id="m-platform"><option>Wordwall</option><option>Quizizz</option><option>Kahoot</option><option>Educandy</option><option>Bamboozle</option><option>Lainnya</option></select></div><div class="form-group"><label class="form-label">Kategori</label><select class="form-control" id="m-kat"><option>Matematika</option><option>IPA</option><option>Bahasa</option><option>IPS</option><option>Umum</option></select></div><div class="form-group"><label class="form-label">URL Game</label><input type="url" class="form-control" id="m-url" value="${isEdit?(item?.url||''):''}"></div><div class="form-group"><label class="form-label">Deskripsi</label><textarea class="form-control" rows="2" id="m-desc">${isEdit?(item?.desc||''):''}</textarea></div><div class="form-group"><label class="form-label">Daftar Link Soal</label><textarea class="form-control" rows="4" id="m-soal-links" placeholder="Format: Nama Soal|URL|Opsional Deskripsi">${soalRaw}</textarea><div style="font-size:0.78rem;color:#64748B;margin-top:0.35rem">Isi per baris: Nama|URL|Deskripsi (opsional). Contoh: Soal PG 1|https://...|Pembahasan/opsional</div></div>`;
   }else if(type==='link'){
     html=`<div class="form-group"><label class="form-label">Nama Layanan</label><input class="form-control" id="m-nama" value="${isEdit?(item?.nama||''):''}"></div><div class="form-group"><label class="form-label">Kategori</label><input class="form-control" id="m-kat" value="${isEdit?(item?.kat||''):''}"></div><div class="form-group"><label class="form-label">Icon (emoji)</label><input class="form-control" id="m-icon" value="${isEdit?(item?.icon||''):''}"></div><div class="form-group"><label class="form-label">URL</label><input type="url" class="form-control" id="m-url" value="${isEdit?(item?.url||''):''}"></div><div class="form-group"><label class="form-label">Deskripsi</label><input class="form-control" id="m-desc" value="${isEdit?(item?.desc||''):''}"></div>`;
   }else if(type==='galeri'){
@@ -293,6 +419,24 @@ function openAdminModal(type,id){
   body.innerHTML=html;modal.classList.add('open');
 }
 function closeAdminModal(){document.getElementById('adminModal').classList.remove('open');}
+
+function parseSoalLinks(raw){
+  if(!raw || !raw.trim()) return [];
+  const lines=raw.split(/\r?\n/).map(l=>l.trim()).filter(Boolean);
+  const out=[];
+  for(const line of lines){
+    // Nama|URL|Optional Deskripsi
+    const parts=line.split('|');
+    if(parts.length<2) continue;
+    const nama=parts[0].trim();
+    const url=parts[1].trim();
+    const desc=(parts.slice(2).join('|')||'').trim();
+    if(!url) continue;
+    out.push({nama:nama||`Soal ${out.length+1}`,url,desc:desc||''});
+  }
+  return out;
+}
+
 function saveAdminModal(){
   const type=currentModalType;const id=currentModalId;const isEdit=id!==null;
   const newId=isEdit?id:(Math.max(...(db[type]?.map(x=>x.id)||[0]))+1);
@@ -300,7 +444,11 @@ function saveAdminModal(){
   const g=i=>document.getElementById(i)?.value||'';
   if(type==='berita')obj={...obj,judul:g('m-judul'),kat:g('m-kat'),tgl:g('m-tgl')||new Date().toISOString().split('T')[0],isi:g('m-isi'),status:'Aktif',emoji:'📰'};
   else if(type==='guru')obj={...obj,nama:g('m-nama'),mapel:g('m-mapel'),email:g('m-email'),emoji:'👩‍🏫'};
-  else if(type==='game')obj={...obj,nama:g('m-nama'),platform:g('m-platform'),kat:g('m-kat'),url:g('m-url'),desc:g('m-desc'),emoji:'🎮'};
+  else if(type==='game'){
+    const soalRaw=g('m-soal-links');
+    const soalLinks=parseSoalLinks(soalRaw);
+    obj={...obj,nama:g('m-nama'),platform:g('m-platform'),kat:g('m-kat'),url:g('m-url'),desc:g('m-desc'),soalLinks,emoji:'🎮'};
+  }
   else if(type==='link')obj={...obj,nama:g('m-nama'),kat:g('m-kat'),icon:g('m-icon'),url:g('m-url'),desc:g('m-desc')};
   else if(type==='galeri')obj={...obj,judul:g('m-judul'),kat:g('m-kat'),tipe:g('m-tipe'),emoji:g('m-emoji'),tinggi:'short'};
   else if(type==='ekskul')obj={...obj,nama:g('m-nama'),pembina:g('m-pembina'),jadwal:g('m-jadwal'),desc:g('m-desc'),emoji:'⭐',warna:'#2563EB',prestasi:''};

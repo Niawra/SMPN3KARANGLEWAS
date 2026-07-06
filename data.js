@@ -34,16 +34,33 @@ const db = {
     {id:24,nama:'Nurjanah Haryanti',mapel:'Tata Usaha',emoji:'👩‍🏫'},
   ],
   game: [
-    {id:1,nama:'Matematika',emoji:'🎯'},
-    {id:2,nama:'IPA',emoji:'🔬'},
-    {id:3,nama:'Bahasa Indonesia',emoji:'📝'},
-    {id:4,nama:'Pendidikan Agama',emoji:'🍬'},
-    {id:5,nama:'IPS',emoji:'🌍'},
-    {id:6,nama:'PPKn',emoji:'🏛️'},
-    {id:7,nama:'Bahasa Inggris',emoji:'🗣️'},
-    {id:8,nama:'Informatika',emoji:'📜'},
-    {id:9,nama:'CBP Rupiah',emoji:'📜'}
+    {id:1,nama:'Matematika',emoji:'🎯',platform:'Game Edukasi',kat:'Matematika',url:'https://wordwall.net/play/58047/054/949',desc:'Belajar matematika dengan game edukasi.',materiUrl:'https://example.com/materi-matematika'},
+    {id:2,nama:'IPA',emoji:'🔬',platform:'Game Edukasi',kat:'IPA',url:'https://example.com/ipa',desc:'Belajar IPA dengan latihan interaktif.',materiUrl:'https://example.com/materi-ipa'},
+    {id:3,nama:'Bahasa Indonesia',emoji:'📝',platform:'Game Edukasi',kat:'Bahasa',url:'https://example.com/bindo',desc:'Latihan membaca dan menulis lewat game.',materiUrl:'https://example.com/materi-bindo'},
+    {id:4,nama:'Pendidikan Agama',emoji:'🍬',platform:'Game Edukasi',kat:'Umum',url:'https://example.com/agama',desc:'Latihan pemahaman materi agama.',materiUrl:'https://example.com/materi-agama'},
+    {id:5,nama:'IPS',emoji:'🌍',platform:'Game Edukasi',kat:'IPS',url:'https://example.com/ips',desc:'Belajar IPS dengan game pengetahuan.',materiUrl:'https://example.com/materi-ips'},
+    {id:6,nama:'PPKn',emoji:'🏛️',platform:'Game Edukasi',kat:'Umum',url:'https://example.com/ppkn',desc:'Game edukasi PPKn.',materiUrl:'https://example.com/materi-ppkn'},
+    {id:7,nama:'Bahasa Inggris',emoji:'🗣️',platform:'Game Edukasi',kat:'Bahasa',url:'https://example.com/bing',desc:'Latihan kosakata dan grammar lewat game.',materiUrl:'https://example.com/materi-binggris'},
+    {id:8,nama:'Informatika',emoji:'📜',platform:'Game Edukasi',kat:'Umum',url:'https://example.com/inf',desc:'Belajar informatika dasar dengan game.',materiUrl:'https://example.com/materi-informatika',
+      soalLinks:[
+        {nama:'Soal 1',url:'https://s.id/Maya_GameHardwareSoftware ',desc:''},
+        {nama:'Soal 2',url:'https://s.id/Maya_GameHwSw2 ',desc:''},
+        {nama:'Soal 3',url:'https://s.id/Maya_GameHwSw3 ',desc:''}
+      ]
+    },
+
+    {id:9,nama:'CBP Rupiah',emoji:'📜',platform:'Game Edukasi',kat:'Umum',url:'https://example.com/cbp',desc:'Permainan edukasi CBP dan nilai rupiah.',materiUrl:'https://example.com/materi-cbp',
+      soalLinks:[
+        {nama:'Soal 1',url:'https://wordwall.net/play/58047/054/949 ',desc:''},
+        {nama:'Soal 2',url:'https://wordwall.net/EMBED/573C75E1F46E45D882654D79D0DF1A81?THEMEID=1&templateid=3&fontscackid ',desc:''},
+        {nama:'Soal 3',url:'https://wordwall.net/play/31798/173/878 ',desc:''},
+        {nama:'Soal 4',url:'https://wordwall.net/play/31846/224/604 ',desc:''},
+        {nama:'Soal 5',url:'https://wordwall.net/play/31753/301/506 ',desc:''},
+        {nama:'Soal 6',url:'https://wordwall.net/play/31797/650/136 ',desc:''}
+      ]
+    }
   ],
+
   ekskul: [
     {id:1,nama:'Pramuka',emoji:'⚜️',warna:'#F59E0B',pembina:'Kak Agus Santoso, S.Pd.',jadwal:'Jumat, 14.00 - 16.00 WIB',desc:'Kegiatan kepramukaan sebagai ekskul wajib yang membentuk karakter, kedisiplinan, dan jiwa sosial peserta didik.',prestasi:'Juara 1 Jambore Kab. Banyumas 2024'},
     {id:2,nama:'Bola Voli',emoji:'🏐',warna:'#2563EB',pembina:'Bpk. Joko Purnomo, S.Pd.',jadwal:'Senin & Rabu, 15.30 - 17.30 WIB',desc:'Ekskul voli aktif mengikuti berbagai turnamen dan melahirkan atlet-atlet berbakat di tingkat daerah.',prestasi:'Juara 2 Turnamen Voli Kecamatan 2025'},
