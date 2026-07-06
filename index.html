@@ -37,7 +37,7 @@ berbudi luhur, cinta tanah air dan berbudaya lingkungan.">
       <a class="nav-link" href="#" onclick="showPage('perpus')">Perpustakaan</a>
       <a class="nav-link" href="#" onclick="showPage('galeri')">Galeri</a>
       <a class="nav-link" href="#" onclick="showPage('link')">Link Penting</a>
-      <a class="nav-link" href="#" onclick="showPage('kontak')">Kontak</a>
+
     </div>
     <div class="navbar-actions">
       <button class="btn-search" onclick="openSearch()">🔍 Cari</button>
@@ -61,7 +61,7 @@ berbudi luhur, cinta tanah air dan berbudaya lingkungan.">
   <a class="nav-link" href="#" onclick="showPage('galeri');closeMobile()">🖼️ Galeri</a>
   <a class="nav-link" href="#" onclick="showPage('ppdb');closeMobile()">📝 PPDB Online</a>
   <a class="nav-link" href="#" onclick="showPage('link');closeMobile()">🔗 Link Penting</a>
-  <a class="nav-link" href="#" onclick="showPage('kontak');closeMobile()">📞 Kontak</a>
+
 </div>
 
 <!-- Search Overlay -->
@@ -111,22 +111,7 @@ berbudi luhur, cinta tanah air dan berbudaya lingkungan."</em></p>
     <div class="hero-scroll">▼ Scroll ke bawah</div>
   </section>
 
-  <!-- Statistik -->
-  <section class="section" style="background:var(--bg)">
-    <div class="section-inner">
-      <div class="section-header">
-        <div class="section-eyebrow">Data Sekolah</div>
-        <h2 class="section-title">Statistik SMPN 3 Karanglewas</h2>
-      </div>
-      <div class="stats-grid fade-in">
-        <div class="stat-card"><div class="stat-icon">👨‍🎓</div><div class="stat-number counter" data-target="640">0</div><div class="stat-label">Total Siswa</div></div>
-        <div class="stat-card"><div class="stat-icon">👩‍🏫</div><div class="stat-number counter" data-target="42">0</div><div class="stat-label">Tenaga Pendidik</div></div>
-        <div class="stat-card"><div class="stat-icon">🏛️</div><div class="stat-number counter" data-target="20">0</div><div class="stat-label">Rombel / Kelas</div></div>
-        <div class="stat-card"><div class="stat-icon">⭐</div><div class="stat-number counter" data-target="6">0</div><div class="stat-label">Ekstrakurikuler</div></div>
-        <div class="stat-card"><div class="stat-icon">🏆</div><div class="stat-number counter" data-target="87">0</div><div class="stat-label">Total Prestasi</div></div>
-      </div>
-    </div>
-  </section>
+
 
   <!-- Sambutan Kepala Sekolah -->
   <section class="section sambutan-section">
@@ -161,21 +146,6 @@ berbudi luhur, cinta tanah air dan berbudaya lingkungan."</em></p>
         <div class="keunggulan-card"><div class="keunggulan-icon">📚</div><div class="keunggulan-title">Prestasi Akademik</div><p class="keunggulan-text">Konsisten meraih prestasi tingkat kabupaten hingga nasional dalam berbagai olimpiade dan kompetisi akademik.</p></div>
         <div class="keunggulan-card"><div class="keunggulan-icon">🏆</div><div class="keunggulan-title">Prestasi Non Akademik</div><p class="keunggulan-text">Aktif berprestasi di bidang olahraga, seni, dan pramuka di berbagai ajang kompetisi tingkat daerah dan nasional.</p></div>
         <div class="keunggulan-card"><div class="keunggulan-icon">💻</div><div class="keunggulan-title">Pembelajaran Digital</div><p class="keunggulan-text">Mengintegrasikan teknologi digital dalam pembelajaran untuk menyiapkan siswa menghadapi era Industri 4.0.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Berita Terbaru -->
-  <section class="section" style="background:var(--bg)">
-    <div class="section-inner">
-      <div class="section-header">
-        <div class="section-eyebrow">Informasi</div>
-        <h2 class="section-title">Berita Terbaru</h2>
-        <p class="section-desc">Ikuti terus informasi dan berita terkini dari SMPN 3 Karanglewas.</p>
-      </div>
-      <div class="grid-3 fade-in" id="berita-home"></div>
-      <div style="text-align:center;margin-top:2rem">
-        <button class="btn btn-outline" onclick="showPage('berita')">Lihat Semua Berita →</button>
       </div>
     </div>
   </section>
@@ -331,8 +301,27 @@ berbudi luhur, cinta tanah air dan berbudaya lingkungan."</em></p>
   </div>
 </div>
 
+<!-- PILIH KELAS (UNTUK SOAL) -->
+<div class="kelas-modal" id="pilih-kelas-modal" onclick="closePilihKelasModal()">
+  <div class="kelas-modal-box" onclick="event.stopPropagation()">
+    <div class="kelas-modal-head">
+      <h3 id="pilih-kelas-title">Pilih Kelas</h3>
+      <button class="kelas-modal-close" onclick="closePilihKelasModal()">✕</button>
+    </div>
+    <div class="kelas-modal-body">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem">
+        <button class="btn btn-primary" onclick="chooseKelas(7)">Kelas 7</button>
+        <button class="btn btn-primary" onclick="chooseKelas(8)">Kelas 8</button>
+        <button class="btn btn-primary" onclick="chooseKelas(9)">Kelas 9</button>
+      </div>
+      <p style="margin-top:1rem;color:var(--text-muted);font-size:0.85rem">Pilih kelas untuk melihat daftar soal.</p>
+    </div>
+  </div>
+</div>
+
 <!-- BANK SOAL (HALAMAN BARU UNTUK LINKS SOAL PER GAME) -->
 <div id="page-bank-soal" class="page-section" style="padding-top:70px">
+
   <div style="background:linear-gradient(135deg,#1E3A8A,#2563EB);padding:4rem 1.5rem;text-align:center;color:white">
     <div class="section-eyebrow" style="background:rgba(255,255,255,0.15);color:white">Bank Soal</div>
     <h1 style="font-family:'Poppins',sans-serif;font-size:2rem;font-weight:800;margin:0.75rem 0" id="soal-page-title">Daftar Soal</h1>
@@ -506,49 +495,7 @@ berbudi luhur, cinta tanah air dan berbudaya lingkungan."</em></p>
   </div>
 </div>
 
-<!-- KONTAK -->
-<div id="page-kontak" class="page-section" style="padding-top:70px">
-  <div class="section">
-    <div class="section-inner">
-      <div class="section-header">
-        <div class="section-eyebrow">Hubungi Kami</div>
-        <h2 class="section-title">Kontak Sekolah</h2>
-      </div>
-      <div class="kontak-grid">
-        <div>
-          <div class="kontak-items">
-            <div class="kontak-item"><div class="kontak-icon">📍</div><div><div class="kontak-item-title">Alamat</div><div class="kontak-item-val">Jl. Raya Karanglewas No. 1, Kec. Karanglewas, Kab. Banyumas, Jawa Tengah 53161</div></div></div>
-            <div class="kontak-item"><div class="kontak-icon">📞</div><div><div class="kontak-item-title">Telepon</div><div class="kontak-item-val">(0281) 655123</div></div></div>
-            <div class="kontak-item"><div class="kontak-icon">📧</div><div><div class="kontak-item-title">Email</div><div class="kontak-item-val"> smpn3.karanglewas2025@gmail.com</div></div></div>
-            <div class="kontak-item"><div class="kontak-icon">⏰</div><div><div class="kontak-item-title">Jam Operasional</div><div class="kontak-item-val">Senin–Kamis: 07.00–15.00 WIB<br>Jumat: 07.00–11.30 WIB</div></div></div>
-          </div>
-          <div class="kontak-sosmed">
-            <h4>Media Sosial</h4>
-            <div class="sosmed-links">
-              <a class="sosmed-link" href="#" title="Instagram">📸</a>
-              <a class="sosmed-link" href="#" title="Facebook">👤</a>
-              <a class="sosmed-link" href="#" title="YouTube">▶️</a>
-              <a class="sosmed-link" href="#" title="TikTok">🎵</a>
-            </div>
-          </div>
-          <div class="maps-embed">
-            <span style="font-size:3rem">🗺️</span>
-            <span>Peta Lokasi SMPN 3 Karanglewas</span>
-            <span style="font-size:0.78rem;opacity:0.7">Kec. Karanglewas, Kab. Banyumas</span>
-          </div>
-        </div>
-        <div class="kontak-form">
-          <h3>💌 Kirim Pesan</h3>
-          <div class="form-group"><label class="form-label">Nama Lengkap</label><input type="text" class="form-control" placeholder="Nama Anda"></div>
-          <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-control" placeholder="email@anda.com"></div>
-          <div class="form-group"><label class="form-label">Subjek</label><input type="text" class="form-control" placeholder="Subjek pesan"></div>
-          <div class="form-group"><label class="form-label">Pesan</label><textarea class="form-control" rows="5" placeholder="Tulis pesan Anda di sini..."></textarea></div>
-          <button class="btn btn-primary btn-full" style="padding:0.85rem" onclick="alert('Pesan berhasil terkirim! Kami akan merespon dalam 1x24 jam.')">📨 Kirim Pesan</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 </main>
 
@@ -707,7 +654,7 @@ berbudi luhur, cinta tanah air dan berbudaya lingkungan."</p>
               <h3>Data Guru</h3>
               <button class="btn btn-primary btn-sm" onclick="openAdminModal('guru',null)">+ Tambah Guru</button>
             </div>
-            <table class="admin-table"><thead><tr><th>No</th><th>Nama</th><th>Mata Pelajaran</th><th>Jabatan</th><th>Email</th><th>Aksi</th></tr></thead><tbody id="tabel-guru"></tbody></table>
+            <table class="admin-table"><thead><tr><th>No</th><th>Nama</th><th>Mata Pelajaran</th><th>Aksi</th></tr></thead><tbody id="tabel-guru"></tbody></table>
           </div>
         </div>
 

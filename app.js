@@ -169,12 +169,45 @@ async function copyGameMapelLink(){
 
 // ===== GAME -> BANK SOAL =====
 let gameSoalCurrentGameId = null;
+let gameSoalCurrentKelas = null; // 7/8/9
 
-function openGameSoalPage(gameId){
+function openGameSoalPage(gameId, kelas=null){
   gameSoalCurrentGameId = gameId;
+  gameSoalCurrentKelas = kelas; 
   showPage('bank-soal');
   renderSoalLinks();
-} 
+}
+
+function openPilihKelasForGame(gameId){
+  // Untuk CBP Rupiah: tidak pakai modal pilih kelas
+  const game = db.game.find(g=>g.id===gameId);
+  if(game && game.nama && game.nama.toLowerCase() === 'cbp rupiah'){
+    openGameSoalPage(gameId, null);
+    return;
+  }
+
+  const modal = document.getElementById('pilih-kelas-modal');
+
+  const title = document.getElementById('pilih-kelas-title');
+  if(modal){
+    if(title) title.textContent = `Pilih Kelas - ${game?.nama || 'Game'}`;
+    modal.dataset.gameId = String(gameId);
+    modal.classList.add('open');
+  }
+}
+
+function closePilihKelasModal(){
+  const modal = document.getElementById('pilih-kelas-modal');
+  if(modal) modal.classList.remove('open');
+}
+
+function chooseKelas(kelas){
+  const modal = document.getElementById('pilih-kelas-modal');
+  if(!modal) return;
+  const gameId = Number(modal.dataset.gameId);
+  closePilihKelasModal();
+  openGameSoalPage(gameId, kelas);
+}
 
 function renderSoalLinks(){
   const wrap=document.getElementById('soal-links-wrap');
@@ -183,6 +216,7 @@ function renderSoalLinks(){
 
   const game=db.game.find(g=>g.id===gameSoalCurrentGameId);
   if(!game){
+
     titleEl.textContent='Daftar Soal';
     wrap.innerHTML='<p style="color:var(--text-muted)">Game belum dipilih.</p>';
     return;
@@ -190,11 +224,23 @@ function renderSoalLinks(){
 
   titleEl.textContent=`Daftar Soal - ${game.nama}`;
 
-  const links=Array.isArray(game.soalLinks)?game.soalLinks:[];
+  const isCBPRupiah = game && game.nama && game.nama.toLowerCase() === 'cbp rupiah';
+  let links = [];
+  if(isCBPRupiah){
+    links = Array.isArray(game.soalLinks) ? game.soalLinks : [];
+  }else{
+    const mapByKelas = game.soalLinksByKelas || game.soalLinksPerKelas || null;
+    const kelasKey = String(gameSoalCurrentKelas ?? '');
+    if(mapByKelas && kelasKey && Array.isArray(mapByKelas[kelasKey])){
+      links = mapByKelas[kelasKey];
+    }
+  }
+
   if(!links.length){
-    wrap.innerHTML='<p style="color:var(--text-muted)">Belum ada link soal untuk game ini. Silakan isi dari Admin.</p>';
+    wrap.innerHTML='<p style="color:var(--text-muted)">Belum ada link soal untuk kelas ini.</p>';
     return;
   }
+
 
   wrap.innerHTML = links.map((s,idx)=>{
     const nama=s.nama||`Soal ${idx+1}`;
@@ -239,7 +285,11 @@ function renderGames(){
   const pages=Math.ceil(list.length/gamePerPage);
   const slice=list.slice((gamePage-1)*gamePerPage,gamePage*gamePerPage);
   const grid=document.getElementById('game-grid');
-  if(grid) grid.innerHTML=slice.map(g=>`<div class="game-card"><div class="game-thumb">${g.emoji}<span class="game-platform">${g.platform}</span></div><div class="game-body"><div class="game-cat">${g.kat}</div><div class="game-title">${g.nama}</div><div class="game-desc">${g.desc}</div><div style="display:flex;gap:0.6rem;flex-wrap:wrap"><button class="btn btn-primary btn-sm" style="flex:1 1 160px" onclick="openGameSoalPage(${g.id})">🧾 Daftar Soal</button></div></div></div></div>`).join('');
+  if(grid) grid.innerHTML=slice.map(g=>{
+    const isCBPRupiah = g && g.nama && g.nama.toLowerCase()==='cbp rupiah';
+    const onClick = isCBPRupiah ? `openGameSoalPage(${g.id})` : `openPilihKelasForGame(${g.id})`;
+    return `<div class="game-card"><div class="game-thumb">${g.emoji}<span class="game-platform">${g.platform}</span></div><div class="game-body"><div class="game-cat">${g.kat}</div><div class="game-title">${g.nama}</div><div class="game-desc">${g.desc}</div><div style="display:flex;gap:0.6rem;flex-wrap:wrap"><button class="btn btn-primary btn-sm" style="flex:1 1 160px" onclick="${onClick}">🧾 Daftar Soal</button></div></div></div></div>`;
+  }).join('');
   // pagination
   renderPagination('game-pagination',pages,gamePage,p=>{gamePage=p;renderGames();});
 }
@@ -261,7 +311,7 @@ function renderEkskul(){
 function openEkskulModal(id){
   const e=db.ekskul.find(x=>x.id===id);
   if(!e)return;
-  document.getElementById('ekskul-modal-content').innerHTML=`<div class="ekskul-modal-header" style="background:linear-gradient(135deg,${e.warna}44,${e.warna}88)">${e.emoji}<button class="ekskul-modal-close" onclick="closeEkskulModal()">✕</button></div><div class="ekskul-modal-body"><h2 style="font-family:'Poppins',sans-serif;font-weight:700;color:var(--text);margin-bottom:0.5rem">${e.nama}</h2><p style="color:var(--text-muted);line-height:1.7;margin-bottom:1.5rem">${e.desc}</p><div class="ekskul-detail-grid"><div class="ekskul-detail-item"><label>Pembina</label><span>${e.pembina}</span></div><div class="ekskul-detail-item"><label>Jadwal Latihan</label><span>${e.jadwal}</span></div><div class="ekskul-detail-item"><label>Prestasi Terkini</label><span>${e.prestasi}</span></div></div></div>`;
+  document.getElementById('ekskul-modal-content').innerHTML=`<div class="ekskul-modal-header" style="background:linear-gradient(135deg,${e.warna}44,${e.warna}88)">${e.emoji}<button class="ekskul-modal-close" onclick="closeEkskulModal()">✕</button></div><div class="ekskul-modal-body"><h2 style="font-family:'Poppins',sans-serif;font-weight:700;color:var(--text);margin-bottom:0.5rem">${e.nama}</h2><p style="color:var(--text-muted);line-height:1.7;margin-bottom:1.5rem">${e.desc}</p><div class="ekskul-detail-grid"><div class="ekskul-detail-item"><label>Pembina</label><span>${e.pembina}</span></div><div class="ekskul-detail-item"><label>Jadwal Latihan</label><span>${e.jadwal}</span></div>`;
   document.getElementById('ekskul-modal').classList.add('open');
 }
 function closeEkskulModal(){document.getElementById('ekskul-modal').classList.remove('open');}
@@ -334,6 +384,7 @@ function renderPagination(containerId,total,current,cb){
 // ===== ADMIN =====
 function openAdmin(){document.getElementById('main-content').style.display='none';document.getElementById('admin-panel').classList.add('active');document.getElementById('navbar').style.display='none';document.querySelector('footer').style.display='none';}
 function closeAdmin(){document.getElementById('main-content').style.display='';document.getElementById('admin-panel').classList.remove('active');document.getElementById('navbar').style.display='';document.querySelector('footer').style.display='';showPage('beranda');}
+
 function doLogin(){
   const u=document.getElementById('login-user').value;
   const p=document.getElementById('login-pass').value;
@@ -415,6 +466,7 @@ function openAdminModal(type,id){
   }else if(type==='ekskul'){
     html=`<div class="form-group"><label class="form-label">Nama Ekskul</label><input class="form-control" id="m-nama" value="${isEdit?(item?.nama||''):''}"></div><div class="form-group"><label class="form-label">Pembina</label><input class="form-control" id="m-pembina" value="${isEdit?(item?.pembina||''):''}"></div><div class="form-group"><label class="form-label">Jadwal</label><input class="form-control" id="m-jadwal" value="${isEdit?(item?.jadwal||''):''}"></div><div class="form-group"><label class="form-label">Deskripsi</label><textarea class="form-control" rows="3" id="m-desc">${isEdit?(item?.desc||''):''}</textarea></div>`;
   }
+
   html+=`<div style="display:flex;gap:0.75rem;margin-top:1.5rem"><button class="btn btn-primary" onclick="saveAdminModal()">💾 Simpan</button><button class="btn btn-outline" onclick="closeAdminModal()">Batal</button></div>`;
   body.innerHTML=html;modal.classList.add('open');
 }
@@ -443,7 +495,7 @@ function saveAdminModal(){
   let obj={id:newId};
   const g=i=>document.getElementById(i)?.value||'';
   if(type==='berita')obj={...obj,judul:g('m-judul'),kat:g('m-kat'),tgl:g('m-tgl')||new Date().toISOString().split('T')[0],isi:g('m-isi'),status:'Aktif',emoji:'📰'};
-  else if(type==='guru')obj={...obj,nama:g('m-nama'),mapel:g('m-mapel'),email:g('m-email'),emoji:'👩‍🏫'};
+  else if(type==='guru')obj={...obj,nama:g('m-nama'),mapel:g('m-mapel'),emoji:'👩‍🏫'};
   else if(type==='game'){
     const soalRaw=g('m-soal-links');
     const soalLinks=parseSoalLinks(soalRaw);
@@ -452,6 +504,7 @@ function saveAdminModal(){
   else if(type==='link')obj={...obj,nama:g('m-nama'),kat:g('m-kat'),icon:g('m-icon'),url:g('m-url'),desc:g('m-desc')};
   else if(type==='galeri')obj={...obj,judul:g('m-judul'),kat:g('m-kat'),tipe:g('m-tipe'),emoji:g('m-emoji'),tinggi:'short'};
   else if(type==='ekskul')obj={...obj,nama:g('m-nama'),pembina:g('m-pembina'),jadwal:g('m-jadwal'),desc:g('m-desc'),emoji:'⭐',warna:'#2563EB',prestasi:''};
+
   if(isEdit){const idx=db[type].findIndex(x=>x.id===id);if(idx!==-1)db[type][idx]={...db[type][idx],...obj};}
   else db[type].push(obj);
   closeAdminModal();updateAdminStats();renderAdminTables();
@@ -471,5 +524,6 @@ function savePerpusSettings(){
   alert('Pengaturan perpustakaan berhasil disimpan!');
 }
 function saveSettings(){alert('Pengaturan website berhasil disimpan!');}
+
  
 

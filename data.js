@@ -42,11 +42,16 @@ const db = {
     {id:6,nama:'PPKn',emoji:'🏛️',platform:'Game Edukasi',kat:'Umum',url:'https://example.com/ppkn',desc:'Game edukasi PPKn.',materiUrl:'https://example.com/materi-ppkn'},
     {id:7,nama:'Bahasa Inggris',emoji:'🗣️',platform:'Game Edukasi',kat:'Bahasa',url:'https://example.com/bing',desc:'Latihan kosakata dan grammar lewat game.',materiUrl:'https://example.com/materi-binggris'},
     {id:8,nama:'Informatika',emoji:'📜',platform:'Game Edukasi',kat:'Umum',url:'https://example.com/inf',desc:'Belajar informatika dasar dengan game.',materiUrl:'https://example.com/materi-informatika',
-      soalLinks:[
-        {nama:'Soal 1',url:'https://s.id/Maya_GameHardwareSoftware ',desc:''},
-        {nama:'Soal 2',url:'https://s.id/Maya_GameHwSw2 ',desc:''},
-        {nama:'Soal 3',url:'https://s.id/Maya_GameHwSw3 ',desc:''}
-      ]
+      // Soal per kelas: tugas menyatakan semua soal informatika yang ada diarahkan ke kelas 7
+      soalLinksByKelas:{
+        '7':[
+          {nama:'Soal 1',url:'https://s.id/Maya_GameHardwareSoftware ',desc:''},
+          {nama:'Soal 2',url:'https://s.id/Maya_GameHwSw2 ',desc:''},
+          {nama:'Soal 3',url:'https://s.id/Maya_GameHwSw3 ',desc:''}
+        ],
+        '8':[],
+        '9':[]
+      }
     },
 
     {id:9,nama:'CBP Rupiah',emoji:'📜',platform:'Game Edukasi',kat:'Umum',url:'https://example.com/cbp',desc:'Permainan edukasi CBP dan nilai rupiah.',materiUrl:'https://example.com/materi-cbp',
@@ -62,13 +67,14 @@ const db = {
   ],
 
   ekskul: [
-    {id:1,nama:'Pramuka',emoji:'⚜️',warna:'#F59E0B',pembina:'Kak Agus Santoso, S.Pd.',jadwal:'Jumat, 14.00 - 16.00 WIB',desc:'Kegiatan kepramukaan sebagai ekskul wajib yang membentuk karakter, kedisiplinan, dan jiwa sosial peserta didik.',prestasi:'Juara 1 Jambore Kab. Banyumas 2024'},
-    {id:2,nama:'Bola Voli',emoji:'🏐',warna:'#2563EB',pembina:'Bpk. Joko Purnomo, S.Pd.',jadwal:'Senin & Rabu, 15.30 - 17.30 WIB',desc:'Ekskul voli aktif mengikuti berbagai turnamen dan melahirkan atlet-atlet berbakat di tingkat daerah.',prestasi:'Juara 2 Turnamen Voli Kecamatan 2025'},
-    {id:3,nama:'PMR',emoji:'🏥',warna:'#EF4444',pembina:'Ibu Rina Fitriani, S.Pd.',jadwal:'Sabtu, 08.00 - 10.00 WIB',desc:'Palang Merah Remaja yang mengajarkan pertolongan pertama, kepedulian sosial, dan kemanusiaan.',prestasi:'Terbaik PMR Kabupaten 2024'},
-    {id:4,nama:'Sepak Bola',emoji:'⚽',warna:'#16A34A',pembina:'Bpk. Wahyu Santoso, S.Pd.',jadwal:'Selasa & Kamis, 15.30 - 17.30 WIB',desc:'Tim sepak bola sekolah yang aktif berlatih dan mengikuti kompetisi antar sekolah tingkat kecamatan dan kabupaten.',prestasi:'Semifinalis Liga Pelajar Banyumas 2024'},
-    {id:5,nama:'Seni Tari',emoji:'💃',warna:'#9333EA',pembina:'Ibu Yanti Kusuma, S.Pd.',jadwal:'Rabu & Jumat, 14.00 - 16.00 WIB',desc:'Ekstrakurikuler seni tari melatih kemampuan seni dan budaya siswa melalui tari tradisional dan kreasi modern.',prestasi:'Juara 1 Festival Seni Kecamatan 2024'},
-    {id:6,nama:'Hadroh',emoji:'🎵',warna:'#EA580C',pembina:'Bpk. Samsul Bahri, S.Pd.I.',jadwal:'Sabtu, 13.00 - 15.00 WIB',desc:'Kesenian hadroh sebagai wujud pelestarian budaya Islam dan pengembangan bakat seni Islami peserta didik.',prestasi:'Juara 2 Festival Hadroh Kabupaten 2024'}
+    {id:1,nama:'Pramuka',emoji:'⚜️',warna:'#F59E0B',pembina:"Achmad Sa'bani, Ali Imron S.Pd dan Fita Dhamawati S.Si",jadwal:'Jumat, 10.35 - 14.30 WIB',desc:'Kegiatan kepramukaan sebagai ekskul wajib yang membentuk karakter, kedisiplinan, dan jiwa sosial peserta didik.'},
+    {id:2,nama:'Bola Voli',emoji:'🏐',warna:'#2563EB',pembina:'Nur Tsani Fauzi S.Pd.Jas',jadwal:'Senin & Rabu, 14.00 - 15.00 WIB',desc:'Ekskul voli aktif melatih kekompakan, ketangkasan, dan sportivitas peserta didik.'},
+    {id:3,nama:'PMR',emoji:'🏥',warna:'#EF4444',pembina:'Imam Sudrajat S.Pd dan Nur Magni Maghfiroh S.Pd',jadwal:'Selasa, 14.00 - 15.00 WIB',desc:'Palang Merah Remaja yang mengajarkan pertolongan pertama, kepedulian sosial, dan kemanusiaan.'},
+    {id:4,nama:'Sepak Bola',emoji:'⚽',warna:'#16A34A',pembina:'Nur Tsani Fauzi S.Pd.Jas',jadwal:'Selasa & Kamis, 14.00 - 15.00 WIB',desc:'Tim sepak bola sekolah yang aktif berlatih dan mengikuti kompetisi antar sekolah tingkat kecamatan dan kabupaten.'},
+    {id:5,nama:'Seni Tari',emoji:'💃',warna:'#9333EA',pembina:'Rery Mei Isnawati S.Pd',jadwal:'Kamis, 14.00 - 15.00 WIB',desc:'Ekstrakurikuler seni tari melatih kemampuan seni dan budaya siswa melalui tari tradisional dan kreasi modern.'},
+    {id:6,nama:'Hadroh',emoji:'🎵',warna:'#EA580C',pembina:'Solikhun S.Pd.I',jadwal:'Rabu, 14.00 - 15.00 WIB',desc:'Kesenian hadroh sebagai wujud pelestarian budaya Islam dan pengembangan bakat seni Islami peserta didik.'}
   ],
+
   galeri: [
     {id:1,judul:'Upacara Bendera Senin',kat:'Upacara',tipe:'foto',emoji:'🇮🇩',tinggi:'tall'},
     {id:2,judul:'Olimpiade Matematika',kat:'Perlombaan',tipe:'foto',emoji:'🏆',tinggi:'short'},

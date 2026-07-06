@@ -1,11 +1,18 @@
-# TODO - Fitur Mata Pelajaran (Game Edukasi)
+# TODO - Update Game Edukasi (Pilih Kelas)
 
-- [ ] 1) Buat dummy data `db.mataPelajaran` untuk minimal 3 mapel, masing-masing kelas 7/8/9, minimal 3 link per kelas.
-- [ ] 2) Tambahkan section / halaman baru di `index.html` untuk tampilan nested menu mapel → kelas → link materi.
-- [ ] 3) Update `app.js`:
-  - Render mapel card pada halaman Game Edukasi (atau halaman baru khusus).
-  - Render nested pilihan kelas dan link.
-  - Implement routing sederhana `showPage('mata-pelajaran')`.
-- [ ] 4) Tambahkan styling modern responsive di `style.css` (card, accordion, link list).
-- [ ] 5) Testing manual: klik MTK/IPA/Bahasa → kelas → pastikan link terbuka di tab baru.
+## Rencana
+1. (Data) Ubah struktur soal untuk semua game kecuali **CBP Rupiah** menjadi berbasis kelas (7/8/9).
+   - Informatika: soal lama dipindah ke kelas 7.
+   - Kelas 8/9 dibuat kosong.
+2. (UI) Tambahkan modal “Pilih Kelas” di `index.html` pada halaman Game Edukasi.
+3. (Logic) Perbarui flow di `app.js`:
+   - Saat klik “Daftar Soal” untuk game non-CBP → tampilkan modal pilih kelas.
+   - Saat pilih kelas → buka `page-bank-soal` dan tampilkan soal sesuai kelas.
+   - Untuk CBP Rupiah → tetap langsung tampil daftar soal (tanpa modal kelas).
+4. (Render) Update `renderSoalLinks()` di `app.js` agar mengambil soal sesuai kelas.
+5. (Styling) Jika perlu, tambah style modal pilih kelas di `style.css`.
+6. (Test) Verifikasi:
+   - Informatika kelas 7 tampil 3 soal.
+   - Informatika kelas 8/9 kosong.
+   - CBP Rupiah tidak ada modal kelas.
 

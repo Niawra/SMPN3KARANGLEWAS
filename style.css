@@ -209,7 +209,6 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--tex
 .guru-photo { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #2563EB, #60A5FA); display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.8rem; color: white; }
 .guru-name { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--text); margin-bottom: 0.25rem; }
 .guru-mapel { color: var(--primary); font-size: 0.82rem; font-weight: 600; margin-bottom: 0.25rem; }
-.guru-jabatan { color: var(--text-muted); font-size: 0.8rem; }
 .fasilitas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
 .fasilitas-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; display: flex; align-items: center; gap: 0.75rem; transition: var(--transition); }
 .fasilitas-item:hover { border-color: var(--primary); }
@@ -226,6 +225,16 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--tex
 .org-photo { width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, #2563EB, #60A5FA); display: flex; align-items: center; justify-content: center; margin: 0 auto 0.75rem; font-size: 1.3rem; color: white; }
 .org-name { font-weight: 600; font-size: 0.88rem; color: var(--text); }
 .org-role { color: var(--primary); font-size: 0.78rem; }
+
+/* ===== PILIH KELAS (MODAL SOAL) ===== */
+.kelas-modal { display:none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 3400; align-items:center; justify-content:center; padding: 1.5rem; }
+.kelas-modal.open { display:flex; }
+.kelas-modal-box { background: var(--bg-card); border-radius: var(--radius-xl); width: 100%; max-width: 520px; box-shadow: var(--shadow-xl); overflow: hidden; }
+.kelas-modal-head { padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border); display:flex; align-items:center; justify-content:space-between; gap: 1rem; }
+.kelas-modal-head h3 { font-family:'Poppins',sans-serif; font-weight:800; color: var(--text); font-size: 1.2rem; }
+.kelas-modal-close { background:none; border: 1px solid var(--border); color: var(--text-muted); width: 40px; height: 40px; border-radius: 10px; cursor:pointer; transition: var(--transition); }
+.kelas-modal-close:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-1px); }
+.kelas-modal-body { padding: 1.25rem 1.5rem; }
 
 /* ===== GAME EDUKASI ===== */
 .game-filters { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
