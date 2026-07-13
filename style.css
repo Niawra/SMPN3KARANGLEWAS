@@ -116,10 +116,7 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--tex
 .hero-card-main { background: rgba(255,255,255,0.12); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.2); border-radius: var(--radius-xl); padding: 2rem; color: white; }
 .hero-school-name { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1.3rem; margin-bottom: 0.5rem; }
 .hero-school-tagline { font-size: 0.85rem; opacity: 0.8; margin-bottom: 1.5rem; line-height: 1.5; }
-.hero-stats-mini { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; }
-.hero-stat-mini { text-align: center; }
-.hero-stat-mini-num { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1.5rem; display: block; }
-.hero-stat-mini-label { font-size: 0.7rem; opacity: 0.75; }
+
 .hero-scroll { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.7); font-size: 0.8rem; text-align: center; animation: bounce 2s infinite; }
 @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(-8px)} }
 
@@ -167,8 +164,10 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--tex
 [data-theme="dark"] .sambutan-section { background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); }
 .sambutan-inner { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; align-items: center; max-width: 1200px; margin: 0 auto; }
 .sambutan-photo { text-align: center; }
-.photo-frame { width: 220px; height: 220px; border-radius: var(--radius-xl); background: linear-gradient(135deg, #2563EB, #60A5FA); margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 5rem; color: white; box-shadow: 0 20px 40px rgba(37,99,235,0.3); }
+.photo-frame { width: 220px; height: 220px; border-radius: var(--radius-xl); background: linear-gradient(135deg, #2563EB, #60A5FA); margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 5rem; color: white; box-shadow: 0 20px 40px rgba(37,99,235,0.3); overflow: hidden; }
+.photo-frame .sambutan-photo-img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .sambutan-name { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--text); }
+
 .sambutan-role { color: var(--primary); font-size: 0.9rem; font-weight: 500; }
 .sambutan-quote { font-family: 'Poppins', sans-serif; font-size: 1.3rem; font-weight: 600; color: var(--text); line-height: 1.5; margin-bottom: 1.5rem; position: relative; padding-left: 1.5rem; border-left: 4px solid var(--primary); }
 .sambutan-text { color: var(--text-muted); line-height: 1.8; margin-bottom: 1.5rem; }
@@ -513,5 +512,5 @@ table.admin-table { width: 100%; border-collapse: collapse; }
 }
 @media (max-width: 480px) {
   .galeri-grid { columns: 1; }
-  .hero-stats-mini { grid-template-columns: 1fr; gap: 0.5rem; }
 }
+
