@@ -107,14 +107,33 @@ function formatDate(d){const [y,m,da]=d.split('-');const months=['Jan','Feb','Ma
 
 // ===== GURU =====
 let guruPage=1;const guruPerPage=8;
-function renderGuru(){
+function renderGuru(){  `zd
+  r`
   const search=document.getElementById('guruSearch')?.value.toLowerCase()||'';
   const mapel=document.getElementById('guruMapel')?.value||'';
-  let list=db.guru.filter(g=>(!search||g.nama.toLowerCase().includes(search))&&(!mapel||g.mapel===mapel));
+  let list = db.guru.filter(g => {
+    const nama = (g.nama ?? '').toString();
+    const mapelGuru = (g.mapel ?? '').toString();
+
+    const cocokNama = !search || nama.toLowerCase().includes(search);
+
+    const cocokMapel = !mapel ||
+      mapelGuru
+        .split(" dan ")
+        .map(m => m.trim().toLowerCase())
+        .includes(mapel.toLowerCase());
+
+    return cocokNama && cocokMapel;
+  });
   const pages=Math.ceil(list.length/guruPerPage);
   const slice=list.slice((guruPage-1)*guruPerPage,guruPage*guruPerPage);
   const grid=document.getElementById('guru-grid');
-  if(grid) grid.innerHTML=slice.map(g=>`<div class="guru-card"><div class="guru-photo">${g.emoji}</div><div class="guru-name">${g.nama}</div><div class="guru-mapel">${g.mapel}</div><div style="font-size:0.78rem;color:var(--text-muted);margin-top:0.25rem">✉️ ${g.email}</div></div>`).join('');
+  if(grid) grid.innerHTML=slice.map(g=>{
+    const nama = g.nama ?? '';
+    const mapelGuru = g.mapel ?? '';
+    const mapelText = (mapelGuru === 'undefined' || mapelGuru === undefined || mapelGuru === null) ? '' : mapelGuru;
+    return `<div class="guru-card"><div class="guru-photo">${g.emoji ?? ''}</div><div class="guru-name">${nama}</div><div class="guru-mapel">${mapelText}</div><div style="font-size:0.78rem;color:var(--text-muted);margin-top:0.25rem"> ${g.email ?? ''}</div></div>`;
+  }).join('');
   renderPagination('guru-pagination',pages,guruPage,p=>{guruPage=p;renderGuru();});
 }
 function filterGuru(){guruPage=1;renderGuru();}
